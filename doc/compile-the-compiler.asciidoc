@@ -23,11 +23,9 @@ When it's finished, we can test it by compiling a simple Rust program and runnin
 Hello, World.
 -------------
 
-~~~~~~~~~~~~~~~~~~~~~~~rust
-fn main() {
-    println!("hello, world.");
-}
-~~~~~~~~~~~~~~~~~~~~~~~
+        fn main() {
+            println!("hello, world.");
+        }
 
 
 To compile Rust code:
