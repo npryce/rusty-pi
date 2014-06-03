@@ -1,1 +1,42 @@
- 
+Compiling the Compiler
+----------------------
+
+
+Cross Compile to Raspberry Pi
+
+From...
+https://mail.mozilla.org/pipermail/rust-dev/2014-February/008556.html
+https://gist.github.com/amatus/6665852
+
+Use gnueabihf for hardware floating point (not gnueabi which uses software floating point).
+
+To compile the rustc compiler:
+
+export PATH=$PWD/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian/bin:$PATH
+./configure --target=arm-unknown-linux-gnueabihf && make
+
+Then wait a loooooooonnnnnggggggggg time.
+
+When it's finished, we can test it by compiling a simple Rust program and running it on the Pi.
+
+
+Hello, World.
+-------------
+
+~~~~~~~~~~~~~~~~~~~~~~~rust
+fn main() {
+    println!("hello, world.");
+}
+~~~~~~~~~~~~~~~~~~~~~~~
+
+
+To compile Rust code:
+
+        % export PATH=$PWD/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian/bin:$PATH
+        % ~/rust/rustc/i686-unknown-linux-gnu/stage2/bin/rustc \
+             --target=arm-unknown-linux-gnueabihf -C linker=arm-linux-gnueabihf-gcc  hello.rs
+
+
+A Rust program starts by running the function called main in the source file that was compiled into the executable program.
+
+Println! is like a type safe version of C’s printf function, but is defined in the standard library’s “prelude”, functions that can be used in every Rust program and module without being explicitly imported.
