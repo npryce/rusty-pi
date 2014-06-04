@@ -21,17 +21,17 @@ You need to add yourself to the fuse group to mount FUSE filesystems like sshfs.
 
 Now log out and back in again and you’ll be able to mount remote directories into the filesystem on the Pi:
 
-        % mkdir quick2wire
-        % sshfs -o idmap=user -o gid=`id --group` nat@192.168.1.4:quick2wire quick2wire
+        % mkdir rusty-pi
+        % sshfs -o idmap=user -o gid=`id --group` nat@192.168.1.4:rusty-pi rusty-pi
         
-(Replace “192.168.1.4″ with the IP address or hostname of your PC and “nat” with your user id on your PC.)
+(Replace "192.168.1.4" with the IP address or hostname of your PC and "nat" with your user id on your PC)
 
 Now you can edit the files on your PC, and run them on the Pi immediately.
 
 Automating logon to the Pi
 --------------------------
 
-You’ll get asked to enter your password each time you want to connect. If you use an SSH key-pair, life is even simpler; ssh will use the keys to log you in without you having to enter your password.
+You’ll get asked to enter your password each time you want to connect. If you use an SSH key-pair, life is even simpler. Ssh will use the keys to log you in without you having to enter your password.
 
 If you need to generate a key pair on your PC. run
 
@@ -52,7 +52,7 @@ To transfer your public key to the the RPi, on your PC run:
 
 On a Mac you'll have to run:
 
-        % cat ~/.ssh/id_rsa.pub | ssh nat@<raspi-ip> "umask 077; mkdir -p .ssh ; cat >> .ssh/authorized_keys"
+        % cat ~/.ssh/id_rsa.pub | ssh nat@192.168.1.4 "umask 077; mkdir -p .ssh ; cat >> .ssh/authorized_keys"
 
 After one final prompt you won’t be prompted for your Pi password when using ssh or sshfs.
 
@@ -61,5 +61,5 @@ When you’re finished
 
 When you’ve finished, unmount the directory using fusermount -u:
 
-        % fusermount -u quick2wire
+        % fusermount -u rusty-pi
 
