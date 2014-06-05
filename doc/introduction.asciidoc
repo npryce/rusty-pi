@@ -3,9 +3,9 @@ Introduction
 
 This is a book about Rust, a new programming language being developed by Mozilla.
 
-We are in an unexpected language renaissance, at least for application development.  New languages like Scala, Clojure, F# and Swift are displacing Java, C#, Ruby and Objective-C.  But for *system* programming, in which precise control over memory and hardware are necessary, C and C++ still rule the roost.
+We are currently enjoying a renaissance of programming language design, at least for application development.  New languages like Scala, Clojure, F# and Swift are displacing Java, C#, Ruby and Objective-C.  But for *system* programming, in which precise control over memory and hardware are necessary, C and C\+\+ still rule the roost.  But C and C++ are error prone -- it is so very easy for programmers to make mistakes that corrupt memory. crash the running program or, worse, allow attackers to bypass security.
 
-I'm excited about Rust because it has a good chance of changing that. Rust applies the latest research in type theory to a system programming language to catch many of the errors that are common in C and C++ programming.  It provides:
+I'm excited about Rust because it applies the latest research in type theory to a system programming language to catch many of the errors that are common in C and C++ programming.  It provides:
 
  * type safety - use generic types instead of casting to/from void pointers.
  * memory safety - the compiler will not allow the program to defererence null pointers or dereference pointers to memory before it has been initialised or after it has been deallocated.
@@ -16,6 +16,5 @@ The features of Rust make it very attractive for physical computing - using comp
 
 This book is not an in-depth tutorial about Rust, nor is it an in depth introduction to electronic engineering.  I'm going to use physical computing to demonstrate Rust's language features in action and show how and why they are useful.  
 
-So think of this book as a form of evangelism.  I think the software industry desparately needs a new widely-used system programming language.  As a language, Rust is as good a candidate as we have.  I hope that the programs in this book will inspire you to learn more about Rust. I hope you choose to use it in your own projects. I hope you enthuse about it to other programmers. I hope that, eventually, Rust will become a popular, widely supported language and I never have to debug a C program again.
-
+So think of this book as a form of evangelism.  The software industry desparately needs a new widely-used system programming language.  As a language, Rust is as good a candidate as we have.  I hope that the programs in this book will inspire you to learn more about Rust. I hope you choose to use it in your own projects. I hope you enthuse about it to other programmers. I hope that, eventually, Rust will become a popular, widely supported language and I never have to debug a C program again.
 
