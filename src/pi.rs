@@ -1,4 +1,6 @@
 
+#![allow(dead_code)]
+
 pub mod gpio {
     use std::io::{File,Open,Write,ReadWrite,SeekSet,IoResult,IoError,OtherIoError};
     
