@@ -4,20 +4,20 @@ Nat Pryce
 v0.0.1 2014-06
 :doctype: book
 
-include::introduction.asciidoc
+include::introduction.asciidoc[]
 
 
 Getting Started
 ===============
 
-include::a-look-at-the-raspberry-pi.asciidoc
-include::compile-the-compiler.asciidoc
-include::dev-environment.asciidoc
+include::a-look-at-the-raspberry-pi.asciidoc[]
+include::compile-the-compiler.asciidoc[]
+include::dev-environment.asciidoc[]
 
 Getting Physical
 ================
 
-include::blink.asciidoc
-include::button-blink.asciidoc
-include::signals.asciidoc
-include::i2c.asciidoc
+include::blink.asciidoc[]
+include::button-blink.asciidoc[]
+include::signals.asciidoc[]
+include::i2c.asciidoc[]
