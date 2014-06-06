@@ -12,7 +12,16 @@ I'm excited about Rust because it applies the latest research in type theory to 
  * automatic memory management - Rust automatically frees dynamically allocated memory, avoiding memory leaks.
  * concurrency - Rust organises programs into concurrent tasks that communicate by message sending. The compiler will not allow data races, in which different tasks use the same area of memory without synchronisation.
 
-The features of Rust make it very attractive for physical computing - using computers to sense and control things in the real world.
+
+However, Rust is a very new language. The Rust team are still tying up loose ends to get to version 1.0 of the language. If you're used to mainstream languages you'll find the experience of programming in Rust a bit spartan. There are no powerful IDEs with autocompletion, code transformation & documentation at your fingertips -- you have to write your programs in a plain ol' text editor like Vi, Emacs or Sublime Text. There are few libraries to build applications upon and (at the time of writing) no standard package manager with which Rust users can share libraries with one another footnote:[the Rust team are working on a package manager called Cargo. Hopefully it will have been released by the time you are reading this.].
+
+With a few notable exceptions footnote:[for example, C# and Swift], all new languages have to overcome a chicken-and-egg problem. Programmers are unwilling to use a language that has few libraries and tools, but unwilling to write libraries and tools for a language that has few users. Languages can break out of this vicious circle by finding a niche in which they excel and then expanding from that niche into other application areas.
+For Rust, physical computing could be such a niche. Applications that control physical devices need to:
+* run on bare metal or with high operating-system privileges, that allows bugs to corrupt system state and crash the entire machine
+* read and write to directly to system memory locations, such as memory-mapped device registers, that are usually made inaccessible to application programs by the operating system and virtual memory hardware.
+* coordinate events from multiple hardware devices at the same time
+Rust's type system that disallows invalid use of memory and message-passing concurrency sound like a great help!
+In its current state, Rust is not suitable for use on small 8-bit microcontroller platforms like the Arduino Uno. The Rust compiler has not yet been optimised to generate small executables and the language runtime relies on an operating system for multithreading, memory management and I/O. But this is not a problem on larger single-board systems like the Raspberry Pi, which I use in this book, Arduino Tre and BeagleBone. These computers are built around a 32-bit ARM system-on-a-chip, can run Linux, and have a variety of pinouts for interfacing with the outside world. Even better - they are relatively cheap. A Raspberry Pi costs about £25 (35 USD), although you must add on the cost of an SD card, power supply and Ethernet cable, and keyboard and HDMI connector if you want to use it like a desktop PC.
 
 This book is not an in-depth tutorial about Rust, nor is it an in depth introduction to electronic engineering.  I'm going to use physical computing to demonstrate Rust's language features in action and show how and why they are useful.  
 
