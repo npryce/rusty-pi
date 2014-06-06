@@ -3,7 +3,7 @@ Introduction
 
 This is a book about Rust, a new programming language being developed by Mozilla.
 
-We are currently enjoying a renaissance of programming language design, at least for application development.  New languages like Scala, Clojure, F# and Swift are displacing Java, C#, Ruby and Objective-C.  But for *system* programming, in which precise control over memory and hardware are necessary, C and C\+\+ still rule the roost.  But C and C++ are error prone -- it is so very easy for programmers to make mistakes that corrupt memory. crash the running program or, worse, allow attackers to bypass security.
+We are currently enjoying a renaissance of programming language design, at least for application development.  New languages like Scala, Clojure, F# and Swift are displacing Java, C#, Ruby and Objective-C.  But for *system* programming, in which precise control over memory and hardware are necessary, C and C\+\+ still rule the roost.  Unfortunately C and C++ are error prone -- it is so very easy for programmers to make mistakes that corrupt memory. crash the running program or, worse, allow attackers to bypass security and steal data from or take control of remote computers.
 
 I'm excited about Rust because it applies the latest research in type theory to a system programming language to catch many of the errors that are common in C and C++ programming.  It provides:
 
