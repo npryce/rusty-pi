@@ -3,14 +3,14 @@ Introduction
 
 This is a book about Rust, a new programming language being developed by Mozilla.
 
-We are currently enjoying a renaissance of programming language design, at least for application development.  New languages like Scala, Clojure, F# and Swift are displacing Java, C#, Ruby and Objective-C.  But for *system* programming, in which precise control over memory and hardware are necessary, C and C\+\+ still rule the roost.  Unfortunately C and C++ are error prone -- it is so very easy for programmers to make mistakes that corrupt memory, crash the running program or, worse, allow attackers to bypass security and steal data from or take control of remote computers.
+We are currently enjoying a renaissance of programming language design, at least for application development.  New languages like Scala, Clojure, F# and Swift are displacing Java, C#, Ruby and Objective-C.  But for _system_ programming, in which precise control over memory and hardware are necessary, C and C\++ still rule the roost.  Unfortunately C and C\++ are error prone -- it is so very easy for programmers to make mistakes that corrupt memory, crash the running program or, worse, allow attackers to bypass security and steal data from or take control of remote computers.
 
 I'm excited about Rust because it applies the latest research in type theory to a system programming language to catch many of the errors that are common in C and C++ programming.  It provides:
 
- * type safety - use generic types instead of casting to/from void pointers.
- * memory safety - the compiler will not allow the program to defererence null pointers or dereference pointers to memory before it has been initialised or after it has been deallocated.
- * automatic memory management - Rust automatically frees dynamically allocated memory, avoiding memory leaks.
- * concurrency - Rust organises programs into concurrent tasks that communicate by message sending. The compiler will not allow data races, in which different tasks use the same area of memory without synchronisation.
+* type safety - use generic types instead of casting to/from void pointers.
+* memory safety - the compiler will not allow the program to defererence null pointers or dereference pointers to memory before it has been initialised or after it has been deallocated.
+* automatic memory management - Rust automatically frees dynamically allocated memory, avoiding memory leaks.
+* concurrency - Rust organises programs into concurrent tasks that communicate by message sending. The compiler will not allow data races, in which different tasks use the same area of memory without synchronisation.
 
 
 However, Rust is a very new language. The Rust team are still tying up loose ends to get to version 1.0 of the language. If you're used to mainstream languages you'll find the experience of programming in Rust a bit spartan. There are no powerful IDEs with autocompletion, code transformation & documentation at your fingertips -- you have to write your programs in a plain ol' text editor like Vi, Emacs or Sublime Text. There are few libraries to build applications upon and (at the time of writing) no standard package manager with which Rust users can share libraries with one another footnote:[the Rust team are working on a package manager called Cargo. Hopefully it will have been released by the time you are reading this.].
@@ -24,6 +24,18 @@ For Rust, physical computing could be one such niche. Applications that control 
 
 Rust's type system that disallows invalid use of memory and message-passing concurrency sound like a great help!
 
-In its current state, Rust is not suitable for use on small 8-bit microcontroller boards like the Arduino Uno. The Rust compiler creates programs that are far too large and the language runtime relies on an operating system for multithreading, memory management and I/O. But this is not a problem on more capable single-board systems like the Raspberry Pi, which I use in this book, Arduino Tre and BeagleBone. These computers are built around a 32-bit ARM system-on-a-chip, can run Linux, and have a variety of pinouts for interfacing with the outside world. Even better - they are relatively cheap. A Raspberry Pi costs about £25 (35 USD), although you must add on the cost of an SD card, power supply and Ethernet cable, and keyboard and HDMI connector if you want to use it like a desktop PC.
+In its current state, Rust is not suitable for use on small 8-bit microcontroller boards like the [Arduino Uno]. The Rust compiler creates programs that are far too large and the language runtime relies on an operating system for multithreading, memory management and I/O. But this is not a problem on more capable single-board systems like the [Raspberry Pi], which I use in this book, [Arduino Tre] and [BeagleBone]. These computers are built around a 32-bit ARM system-on-a-chip, can run Linux, and have a variety of pinouts for interfacing with the outside world. Even better - they are relatively cheap. A Raspberry Pi costs about £25 (35 USD), although you must add on the cost of an SD card, power supply and Ethernet cable, and keyboard and HDMI connector if you want to use it like a desktop PC.
 
 This book is not an in-depth tutorial about Rust, nor is it an in depth introduction to electronic engineering.  I'm going to use physical computing to demonstrate Rust's language features in action and show how and why they are useful.  I hope that the programs in this book will inspire you to learn more about Rust. I hope you choose to use Rust in your own projects. I hope you enthuse about Rust to other programmers. I hope that, eventually, Rust will become a popular, widely supported language.
+
+More information about Rust can be found at the following sites.
+
+ * [The Rust Website](http://www.rust-lang.org)
+ * [The Rust Tutorial](http://doc.rust-lang.org/tutorial.html)
+ * [The Rust Reference Manual](http://doc.rust-lang.org/rust.html)
+ * [Rust for Rubyists](http://www.rustforrubyists.com/) by Steve Klabnik: a book about Rust aimed primarily at Ruby programmers.
+
+
+[Arduino Uno]: http://arduino.cc
+[BeagleBone]: http://beagleboard.org/Products/BeagleBone%20Black
+[Raspberry Pi]: http://www.raspberrypi.org/
