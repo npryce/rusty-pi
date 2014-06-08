@@ -1,0 +1,23 @@
+== A Look At The Raspberry Pi
+
+
+=== Circuit Diagrams
+
+image:pi.svg[]
+
+=== Compiling Programs for the Pi
+
+
+Although the Raspberry Pi can be used as a Linux PC with a graphical
+desktop interface, I find it a bit too slow for software development
+compared to a laptop or desktop PC.  When using my Pi to control
+hardware, I prefer to write software on my laptop, compile it for the
+Pi with a cross-compiler footnote:[a compiler that runs on one architecture, such as my laptop running Ubuntu on an Intel x86, and outputs programs for another architecture, such as the Raspberry Pi running Raspbian on an ARM], and deploy it onto the Pi when I want to test it against real hardware.
+
+So, there are two things to sort out before writing Rust programs for
+the Pi:
+
+1. A Rust cross-compiler
+2. How to deploy compiled Rust programs onto the Pi
+
+

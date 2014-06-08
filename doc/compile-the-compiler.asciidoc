@@ -1,40 +1,104 @@
-Compiling the Compiler
-----------------------
+[[compile-cross-compiler]]
+== Compiling the Compiler
+
+Compiling the Rust compiler for the Raspberry Pi. Compiling Hello
+World and running it on the Pi.
 
 
-Cross Compile to Raspberry Pi
+=== Building a Rust Cross-Compiler
 
-From...
-https://mail.mozilla.org/pipermail/rust-dev/2014-February/008556.html
-https://gist.github.com/amatus/6665852
+The Rust compiler is not (yet?) distributed as a cross-compiler for
+the Raspberry Pi.  However, it can be compiled as a cross-compiler
+from source code with the Raspberry Pi development tools.  
 
-Use gnueabihf for hardware floating point (not gnueabi which uses software floating point).
-
-To compile the rustc compiler:
-
-export PATH=$PWD/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian/bin:$PATH
-./configure --target=arm-unknown-linux-gnueabihf && make
-
-Then wait a loooooooonnnnnggggggggg time.
-
-When it's finished, we can test it by compiling a simple Rust program and running it on the Pi.
+That sounds like hard work, but don't worry -- the Rust build process
+is completely automated and very reliable.  Although it does take a
+very _looooonnnnnngggggggg_ time.
 
 
-Hello, World.
--------------
+=== Install Git
 
-        fn main() {
-            println!("hello, world.");
-        }
+You'll need Git to download the Raspberry Pi tools and the source code
+of the Rust compiler.  
+
+Git is available in the package managers for most Linux distributions.
+For example, on Ubuntu or Debian you can install it with the command:
+
+[source,sh]
+-----------------------------------
+% sudo apt-get install git
+-----------------------------------
+
+If Git is not available in your package manager, you can download it
+from http://git-scm.com/download/.
 
 
-To compile Rust code:
+=== Download the Raspberry Pi Tools
 
-        % export PATH=$PWD/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian/bin:$PATH
-        % ~/rust/rustc/i686-unknown-linux-gnu/stage2/bin/rustc \
-             --target=arm-unknown-linux-gnueabihf -C linker=arm-linux-gnueabihf-gcc  hello.rs
+When Git is installed, you can download the Raspberry Pi development
+tools.  The following command downloads the tools into a directory
+named pi-tools in your home directory:
+
+[source,sh]
+---------------------------------------------------------------
+% git clone https://github.com/raspberrypi/tools.git ~/pi-tools
+---------------------------------------------------------------
+
+Then add the Raspberry Pi tools to your shell's command search path:
+
+[source,sh]
+---------------------------------------------------------------
+% export PATH=~/pi-tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian/bin:$PATH
+---------------------------------------------------------------
 
 
-A Rust program starts by running the function called main in the source file that was compiled into the executable program.
+=== Compiling the Rust Cross-Compiler
 
-Println! is like a type safe version of C’s printf function, but is defined in the standard library’s “prelude”, functions that can be used in every Rust program and module without being explicitly imported.
+Now, download the Rust compiler source code:
+
+[source,sh]
+---------------------------------------------------------------
+% git clone http://github.com/mozilla/rust.git
+---------------------------------------------------------------
+
+Then build Rust as a cross-compiler.  The following command will build the cross compiler and install it into a directory called pi-rust in your home directory.
+
+[source,sh]
+-------------------------------------------------------------------
+% ./configure --target-triples=arm-unknown-linux-gnueabihf --prefix=$HOME/pi-rust && make && make install
+-------------------------------------------------------------------
+
+This will take a long time to complete.  When it's finished, we can
+test it by compiling a simple Rust program and running it on the Pi.
+But until then, you've got more than enough time to go have a cup of
+tea. Or two.
+
+
+=== Testing the Cross-Compiler
+
+To test the cross-compiler and deployment of compiled programs onto
+the Pi, we'll compile a traditional Hello World program.  Here's Hello
+World in Rust:
+
+-------------------------------------------------------------------
+include::../src/hello.rs[]
+-------------------------------------------------------------------
+
+Save this into a file called hello.rs.  To compile it for the Pi, make
+sure that the directory
+~/pi-tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian/bin is
+on your path (as shown above), then run the command:
+
+[source,sh]
+-------------------------------------------------------------------
+% ~/pi-rust/bin/rustc/ \
+        --target=arm-unknown-linux-gnueabihf \
+        -C linker=arm-linux-gnueabihf-g++ \
+        hello.rs
+-------------------------------------------------------------------
+
+This will produce an executable program called `hello`.  You won't be
+able to run it on your PC -- you have to deploy it onto the Pi and run
+it there.
+
+We'll look at ways of doing that in the next chapter.

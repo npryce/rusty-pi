@@ -1,0 +1,17 @@
+== Blinking Lights
+
+Blinking an LED via GPIO.  The hello world of physical computing!
+
+
+
+=== The Circuit
+
+image:blink.svg[]
+
+
+=== The Code
+
+
+---------------------------------------------
+include::../src/blink.rs[]
+---------------------------------------------

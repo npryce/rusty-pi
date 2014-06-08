@@ -1,7 +1,7 @@
 Physical Computing with Rust and the Raspberry Pi
 =================================================
 Nat Pryce
-v0.0.1 2014-06
+{version}
 :doctype: book
 
 include::introduction.asciidoc[]
@@ -21,7 +21,7 @@ Getting Physical
 
 include::blink.asciidoc[]
 
-include::button-blink.asciidoc[]
+include::blink-button.asciidoc[]
 
 include::signals.asciidoc[]
 

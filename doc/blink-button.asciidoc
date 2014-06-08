@@ -1,0 +1,16 @@
+== Clicky Buttons
+
+Adding GPIO input to the blink program.
+
+
+=== The Circuit
+
+image:blink-button.svg[]
+
+
+=== The Code
+
+
+---------------------------------------------
+include::../src/blink-button.rs[]
+---------------------------------------------
