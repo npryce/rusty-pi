@@ -1,8 +1,8 @@
 [[compile-cross-compiler]]
 == Compiling the Compiler
 
-Compiling the Rust compiler for the Raspberry Pi. Compiling Hello
-World and running it on the Pi.
+_In which we compile the Rust compiler for the Raspberry Pi, then compile 
+Hello World and run it on the Pi._
 
 
 === Building a Rust Cross-Compiler
@@ -12,8 +12,8 @@ the Raspberry Pi.  However, it can be compiled as a cross-compiler
 from source code with the Raspberry Pi development tools.  
 
 That sounds like hard work, but don't worry -- the Rust build process
-is completely automated and very reliable.  Although it does take a
-very _looooonnnnnngggggggg_ time.
+is completely automated.  It does take a long time to run, but won't 
+require any effort on your part.
 
 
 === Install Git
