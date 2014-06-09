@@ -9,7 +9,7 @@ book_images:=$(wildcard doc/*.svg doc/*.jpg doc/*.png)
 version:=$(shell git describe --tags --always --dirty=-local --match='v*' | sed -e 's/^v//')
 
 
-all: deployed book
+all: book
 
 book: out/html/book.html
 
