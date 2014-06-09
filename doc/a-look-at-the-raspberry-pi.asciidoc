@@ -1,9 +1,26 @@
 == A Look At The Raspberry Pi
 
+[abstract]
+In which we look at the Raspberry Pi computer and it's hardware interfaces.
+
+=== The Raspberry Pi
+
+
 
 === Circuit Diagrams
 
+The circuit diagrams in this book will clearly mark the header pins of the Raspberry Pi, as shown in <<pi-fritzing>>.  
+Those markings aren't printed on the Pi itself.
+
+[[pi-fritzing]]
 image:pi.svg[]
+
+Some people like to print the header pin identifiers on a small piece of paper that they push over the pins, 
+or use a breakout board that has the pins more clearly marked.
+
+=== Protecting Your Pi
+
+
 
 === Compiling Programs for the Pi
 
