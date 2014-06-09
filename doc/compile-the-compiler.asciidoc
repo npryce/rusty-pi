@@ -102,4 +102,4 @@ This will produce an executable program called `hello`.  You won't be
 able to run it on your PC -- you have to deploy it onto the Pi and run
 it there.
 
-We'll look at ways of doing that in the next chapter.
+We'll look at ways of doing that in <<dev-environment,the next chapter>>.

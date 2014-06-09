@@ -5,25 +5,27 @@ In which we look at the Raspberry Pi computer and it's hardware interfaces.
 
 === The Raspberry Pi
 
-
+TODO
 
 === Circuit Diagrams
 
-The circuit diagrams in this book will clearly mark the header pins of the Raspberry Pi, as shown in <<pi-fritzing>>.  
-Those markings aren't printed on the Pi itself.
+The circuit diagrams in this book will clearly mark the header pins of
+the Raspberry Pi, as shown in <<pi-fritzing>>.
 
 [[pi-fritzing]]
+.Raspberry Pi as displayed in a circuit diagrams
 image:pi.svg[]
 
-Some people like to print the header pin identifiers on a small piece of paper that they push over the pins, 
-or use a breakout board that has the pins more clearly marked.
+Those markings aren't printed on the Pi itself.  Some people like to
+print the header pin identifiers on a small piece of paper that they
+push over the pins, or use a breakout board that has the pins more
+clearly marked.
 
 === Protecting Your Pi
 
-
+TODO
 
 === Compiling Programs for the Pi
-
 
 Although the Raspberry Pi can be used as a Linux PC with a graphical
 desktop interface, I find it a bit too slow for software development
@@ -34,7 +36,7 @@ Pi with a cross-compiler footnote:[a compiler that runs on one architecture, suc
 So, there are two things to sort out before writing Rust programs for
 the Pi:
 
-1. A Rust cross-compiler
-2. How to deploy compiled Rust programs onto the Pi
+1. <<compile-cross-compiler,A Rust cross-compiler>>
+2. <<dev-environment,How to deploy compiled Rust programs onto the Pi>>
 
 
