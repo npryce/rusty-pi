@@ -68,7 +68,6 @@ pub mod gpio {
         }
         
         pub fn set_value(&mut self, value : uint) -> IoResult<()> {
-            try!(self.file.seek(0, SeekSet));
             try!(self.file.write_str(value.to_str()));
             self.file.flush()
         }
@@ -82,7 +81,7 @@ pub mod gpio {
     
     pub fn open_pin(port: uint) -> IoResult<Pin> {
         try!(write_line_to("/sys/class/gpio/export", port));
-        let pin_path = format!("/sys/devices/virtual/gpio/gpio{:u}/value", port);
+        let pin_path = format!("/sys/class/gpio/gpio{:u}/value", port);
         let pin_file = try!(File::open_mode(&Path::new(pin_path), Open, ReadWrite));
         Ok(Pin{port:port, file:pin_file})
     }    

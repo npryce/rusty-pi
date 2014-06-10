@@ -13,7 +13,7 @@ all: book
 
 book: out/html/book.html
 
-deployed: out/blink out/button out/hello out/signals
+deployed: out/blink out/button out/hello out/signals out/raw-blink
 	rsync $^ $(pi):
 
 out/%: src/%.rs src/pi.rs
