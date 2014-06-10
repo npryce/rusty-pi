@@ -20,10 +20,9 @@ require any effort on your part.
 === Install Git
 
 You'll need Git to download the Raspberry Pi tools and the source code
-of the Rust compiler.  
-
-Git is available in the package managers for most Linux distributions.
-For example, on Ubuntu or Debian you can install it with the command:
+of the Rust compiler.  Git is available in the package managers for most 
+Linux distributions. For example, on Ubuntu or Debian you can install it 
+with the command:
 
 [source,sh]
 -----------------------------------
@@ -34,7 +33,7 @@ If Git is not available in your package manager, you can download it
 from http://git-scm.com/download/.
 
 
-=== Download the Raspberry Pi Tools
+=== Downloading the Raspberry Pi Tools
 
 When Git is installed, you can download the Raspberry Pi development
 tools.  The following command downloads the tools into a directory
@@ -43,13 +42,6 @@ named pi-tools in your home directory:
 [source,sh]
 ---------------------------------------------------------------
 % git clone https://github.com/raspberrypi/tools.git ~/pi-tools
----------------------------------------------------------------
-
-Then add the Raspberry Pi tools to your shell's command search path:
-
-[source,sh]
----------------------------------------------------------------
-% export PATH=~/pi-tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian/bin:$PATH
 ---------------------------------------------------------------
 
 
@@ -62,7 +54,16 @@ Now, download the Rust compiler source code:
 % git clone http://github.com/mozilla/rust.git
 ---------------------------------------------------------------
 
-Then build Rust as a cross-compiler.  The following command will build the cross compiler and install it into a directory called pi-rust in your home directory.
+Add the Raspberry Pi tools to your shell's command search path:
+
+[source,sh]
+---------------------------------------------------------------
+% export PATH=~/pi-tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian/bin:$PATH
+---------------------------------------------------------------
+
+Then build Rust as a cross-compiler.  The following command will 
+build the cross compiler and install it into a directory called
+pi-rust in your home directory.
 
 [source,sh]
 -------------------------------------------------------------------
@@ -85,21 +86,18 @@ World in Rust:
 include::../src/hello.rs[]
 -------------------------------------------------------------------
 
-Save this into a file called hello.rs.  To compile it for the Pi, make
-sure that the directory
-~/pi-tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian/bin is
+Save this code into a file called hello.rs.  
+
+To compile it for the Pi, make sure that the Raspberry Pi tools are
 on your path (as shown above), then run the command:
 
 [source,sh]
 -------------------------------------------------------------------
-% ~/pi-rust/bin/rustc/ \
-        --target=arm-unknown-linux-gnueabihf \
-        -C linker=arm-linux-gnueabihf-g++ \
-        hello.rs
+% ~/pi-rust/bin/rustc --target=arm-unknown-linux-gnueabihf -C linker=arm-linux-gnueabihf-g++ hello.rs
 -------------------------------------------------------------------
 
 This will produce an executable program called `hello`.  You won't be
-able to run it on your PC -- you have to deploy it onto the Pi and run
+able to run it on your PC. You have to deploy it onto the Pi and run
 it there.
 
-We'll look at ways of doing that in <<dev-environment,the next chapter>>.
+We'll look at how to do that in <<dev-environment,the next chapter>>.
