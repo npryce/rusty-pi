@@ -1,0 +1,9 @@
+[[pi-photo]]
+.Raspberry Pi Model B
+[image_credit="Mark Ramsay"]
+[image_copyright="03-04-2014"]
+[image_license="CC BY 2.0"]
+[image_source="https://www.flickr.com/photos/neutronboy/14072882546/in/photostream/"]
+[image_modification="cropped, colour balance adjusted"]
+image::pi-photo.jpg[width="40%"]
+

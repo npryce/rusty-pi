@@ -1,11 +1,10 @@
 == A Look At The Raspberry Pi
 
-[abstract]
-In which we look at the Raspberry Pi computer and it's hardware interfaces.
-
 === The Raspberry Pi
 
 TODO
+
+include::pi-photo.asciidoc[]
 
 === Circuit Diagrams
 
