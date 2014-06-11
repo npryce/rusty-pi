@@ -8,7 +8,7 @@ include::pi-photo.asciidoc[]
 
 === Circuit Diagrams
 
-The circuit diagrams in this book will clearly mark the header pins of
+The circuit diagrams in this book will clearly identify the header pins of
 the Raspberry Pi, as shown in <<pi-fritzing>>.
 
 [[pi-fritzing]]
