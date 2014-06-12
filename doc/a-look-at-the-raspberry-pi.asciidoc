@@ -2,7 +2,12 @@
 
 === The Raspberry Pi
 
-TODO
+The Raspberry Pi is a credit-card-sized single-board computer developed 
+by the Raspberry Pi Foundation to promote the teaching  of basic computer
+science in schools.
+
+The Pi is built around a 32-bit ARMv6 system-on-a-chip (SoC) footnote:[the Broadcom BCM2835], has 512MB of RAM, a USB port for keyboard and mouse, and can output HDMI video to a TV or monitor.
+It uses an SD card instead of a hard-drive. Although small, the Pi is powerful enough to run desktop software and games like Minecraft.
 
 include::pi-photo.asciidoc[]
 
