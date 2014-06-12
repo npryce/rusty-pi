@@ -6,6 +6,8 @@ Nat Pryce
 
 include::introduction.asciidoc[]
 
+include::rust-whats-the-big-idea.asciidoc[]
+
 
 Getting Started
 ===============
