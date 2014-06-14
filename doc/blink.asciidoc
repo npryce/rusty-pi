@@ -7,7 +7,8 @@ including modules, control flow, input/output and error handling.
 
 === The Circuit
 
-image:blink.svg[]
+.An LED connected to GPIO pin 18
+image::blink.svg[]
 
 
 === Using GPIO in Raspbian

@@ -1,12 +1,6 @@
 [[compile-cross-compiler]]
 == Compiling the Compiler
 
-[abstract]
-In which we compile the Rust compiler for the Raspberry Pi, then compile 
-Hello World and run it on the Pi.
-
-
-=== Building a Rust Cross-Compiler
 
 The Rust compiler is not (yet?) distributed as a cross-compiler for
 the Raspberry Pi.  However, it can be compiled as a cross-compiler

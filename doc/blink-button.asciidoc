@@ -5,7 +5,8 @@ Adding GPIO input to the blink program.
 
 === The Circuit
 
-image:blink-button.svg[]
+.A push-button added to the blink circuit
+image::blink-button.svg[]
 
 
 === The Code

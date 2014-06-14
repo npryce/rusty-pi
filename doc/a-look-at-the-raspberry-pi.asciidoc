@@ -8,10 +8,25 @@ science in schools.
 
 include::pi-photo.asciidoc[]
 
-The Pi is built around a 32-bit ARMv6 system-on-a-chip (SoC) footnote:[the Broadcom BCM2835], has 512MB of RAM, a USB port for keyboard and mouse, and can output HDMI video to a TV or monitor. It uses an SD card instead of a hard-drive. Although small, the Raspberry Pi is powerful enough to run a desktop operating system and games like Minecraft.
+The Pi is built around a 32-bit ARMv6 system-on-a-chip (SoC)
+footnote:[the Broadcom BCM2835], has 512MB of RAM, a USB port for
+keyboard and mouse, and can output HDMI video to a TV or monitor. It
+uses an SD card instead of a hard-drive. Although small, the Raspberry
+Pi is powerful enough to run a desktop operating system and games like
+Minecraft.
 
-One way in which the Raspberry Pi differs from consumer PCs is that it does not come with a pre-installed operating system. You have to download one and copy it onto an SD card so that you can boot up the Pi and start using it.
-Several operating systems are available, including several Linux distributions. The Raspberry Pi Foundation recommends Raspbian, a variant of Debian Linux, so I'm using Raspbian for the examples in this book.  If you're used to a Debian, or a Debian-based Linux distribution like Ubuntu, Raspbian will be very familiar.  If you prefer a different Linux distribution, I assume you know enough translate any Raspbian-specific commands to your preferred environment.  The Rust programs should behave the same on any Linux distribution.
+One way in which the Raspberry Pi differs from consumer PCs is that it
+does not come with a pre-installed operating system. You have to
+download one and copy it onto an SD card so that you can boot up the
+Pi and start using it.  Several operating systems are available,
+including several Linux distributions. The Raspberry Pi Foundation
+recommends Raspbian, a variant of Debian Linux, so I'm using Raspbian
+for the examples in this book.  If you're used to a Debian, or a
+Debian-based Linux distribution like Ubuntu, Raspbian will be very
+familiar.  If you prefer a different Linux distribution, I assume you
+know enough translate any Raspbian-specific commands to your preferred
+environment.  The Rust programs should behave the same on any Linux
+distribution.
 
 == Interfaces
 
@@ -24,7 +39,7 @@ the Raspberry Pi, as shown in <<pi-fritzing>>.
 
 [[pi-fritzing]]
 .Raspberry Pi as displayed in a circuit diagrams
-image:pi.svg[]
+image::pi.svg[]
 
 Those markings aren't printed on the Pi itself.  Some people like to
 print the header pin identifiers on a small piece of paper that they
