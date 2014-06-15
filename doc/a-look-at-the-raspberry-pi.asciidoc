@@ -9,59 +9,87 @@ science in schools.
 include::pi-photo.asciidoc[]
 
 The Pi is built around a 32-bit ARMv6 system-on-a-chip (SoC)
-footnote:[the Broadcom BCM2835], has 512MB of RAM, a USB port for
-keyboard and mouse, and can output HDMI video to a TV or monitor. It
-uses an SD card instead of a hard-drive. Although small, the Raspberry
-Pi is powerful enough to run a desktop operating system and games like
-Minecraft.
+footnote:[the Broadcom BCM2835], has 512MB of RAM, 3D accelerated
+graphics, a USB port for keyboard and mouse, and can output HDMI video
+to a TV or monitor. It uses an SD card instead of a
+hard-drive. Although small, the Raspberry Pi is powerful enough to run
+a desktop operating system, full motion video at 1080p resolution, and
+3D games like Minecraft.
 
 One way in which the Raspberry Pi differs from consumer PCs is that it
 does not come with a pre-installed operating system. You have to
-download one and copy it onto an SD card so that you can boot up the
-Pi and start using it.  Several operating systems are available,
-including several Linux distributions. The Raspberry Pi Foundation
-recommends Raspbian, a variant of Debian Linux, so I'm using Raspbian
-for the examples in this book.  If you're used to a Debian, or a
-Debian-based Linux distribution like Ubuntu, Raspbian will be very
-familiar.  If you prefer a different Linux distribution, I assume you
-know enough translate any Raspbian-specific commands to your preferred
-environment.  The Rust programs should behave the same on any Linux
-distribution.
+download an operating system image and copy it onto an SD card so that
+you can boot up the Pi and start using it.  You have a choice of
+operating systems and, for Linux, a choice of distributions. The
+Raspberry Pi Foundation recommends Raspbian, a variant of Debian
+Linux, and most software for the Pi is written for
+Raspbian. Therefore, I'm using Raspbian in this book.  If you're used
+to a Debian, or a Debian-based Linux distribution like Ubuntu,
+Raspbian will be very familiar.  If you prefer a different Linux
+distribution, I assume you know enough translate any Raspbian-specific
+commands to your preferred environment.  The Rust programs should
+behave the same on any Linux distribution.
 
-== Interfaces
+=== Interfaces
 
+As well as the usual USB, Ethernet and video ports, the Raspberry Pi
+has a 24-pin header at its top left corner that exposes useful
+interfaces for controlling hardware: a UART serial interface, eight
+GPIO pins for general purpose digital IO, two I2C buses and an SPI
+bus, that can be used to control a variety of hardware devices,
+pulse-width modulation output, as well as 3v3 and 5v0 power and a
+couple of ground pins.
 
+Unlike the Arduino and many other single-board computers, the
+Raspberry Pi has a _male_ header.  This means that to connect the
+header to a breadboard, you have to make sure you buy female-to-male
+jumpers, which have a socket an one end to connect to a header pin and
+a pin at the other to plug into a hole on the breadboard.  These are
+less common than male-to-male jumpers, which have a pin at both ends.
 
-=== Circuit Diagrams
-
-The circuit diagrams in this book will clearly identify the header pins of
-the Raspberry Pi, as shown in <<pi-fritzing>>.
+The other difficulty you'll encounter when you start connecting your
+Raspberry Pi to your circuits is that the header pins are not
+labelled.  In fact, the function of the pins can be remapped by
+software.  However, for this book we will use the default pin
+mappings. The circuit diagrams in this book clearly identify the
+header pins of the Raspberry Pi, as shown in <<pi-fritzing>>, and the
+text will refer to the pins by the same names.
 
 [[pi-fritzing]]
 .Raspberry Pi as displayed in a circuit diagrams
 image::pi.svg[]
 
-Those markings aren't printed on the Pi itself.  Some people like to
-print the header pin identifiers on a small piece of paper that they
-push over the pins, or use a breakout board that has the pins more
-clearly marked.
+Because of these difficulties, some people like to use a "breakout
+board" when connecting their Pi to hardware. A breakout board plugs
+into the header and connects the pins to female headers that are
+organised in logical groups and clearly labelled.  They only cost a
+few pounds and can be very convenient.
+
+An even cheaper option is to print the header pin identifiers on a
+small piece of paper and push it down over the pins, so that the pins
+stick through the paper next to their identifiers.  It's a low tech
+solution but it works just fine.
 
 === Protecting Your Pi
 
-TODO
+TODO: no protection on the header, be careful not to burn out the Pi,
+some breakout boards protect the pi with voltage regulators and diodes,
+beware of static electricity.
 
-=== Compiling Programs for the Pi
+=== Compiling Programs for the Raspberry Pi
 
 Although the Raspberry Pi can be used as a Linux PC with a graphical
-desktop interface, I find it a bit too slow for software development
+desktop interface, I find it a bit slow for software development
 compared to a laptop or desktop PC.  When using my Pi to control
 hardware, I prefer to write software on my laptop, compile it for the
-Pi with a cross-compiler footnote:[a compiler that runs on one architecture, such as my laptop running Ubuntu on an Intel x86, and outputs programs for another architecture, such as the Raspberry Pi running Raspbian on an ARM], and deploy the compiled program onto the Pi when I want to test it against real hardware.
+Pi with a cross-compiler footnote:[a compiler that runs on one
+architecture, such as my laptop running Ubuntu on an Intel x86, and
+outputs programs for another architecture, such as the Raspberry Pi
+running Raspbian on an ARM], and deploy the compiled program onto the
+Pi when I want to test it against real hardware.
 
 So, there are two things to sort out before writing Rust programs for
 the Pi:
 
 1. <<compile-cross-compiler,A Rust cross-compiler>>
 2. <<dev-environment,How to deploy compiled Rust programs onto the Pi>>
-
-
