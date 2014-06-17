@@ -18,6 +18,8 @@ include::compile-the-compiler.asciidoc[]
 
 include::dev-environment.asciidoc[]
 
+include::parts-bin.asciidoc[]
+
 Getting Physical
 ================
 
