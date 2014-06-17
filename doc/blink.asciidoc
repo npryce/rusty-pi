@@ -3,7 +3,8 @@
 Blinking an LED via GPIO is the Hello World of physical computing -- a
 simple program that will cause some visible effect in the connected
 hardware.  It will also demonstrate some more Rust language concepts,
-including modules, control flow, input/output and error handling.
+including modules, control flow, ownership and lifetimes, I/O and 
+error handling.
 
 === The Circuit
 
