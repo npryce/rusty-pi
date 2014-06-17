@@ -8,6 +8,14 @@ error handling.
 
 === The Circuit
 
+You will need:
+
+ * a breadboard
+ * one LED
+ * one 2 kOhm resistor
+ * three female-to-male jumpers
+ * One male-to-male jumper
+
 .An LED connected to GPIO pin 18
 image::blink.svg[]
 
