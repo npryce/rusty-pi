@@ -2,11 +2,43 @@
 
 What to buy.  No Rust learning in this chapter.
 
+You will need some components build the circuits in this book.
 
-You will need some hardware bits and bobs to build the circuits in this book.
+=== A Breadboard
 
-.A Breadboard.  
+image::breadboard.jpg[]
 
 A half-size breadboards are about the same size as the Raspberry Pi and will be plenty big enough for the circuits we will build in this book.
 
-image::breadboard.jpg[]
+
+=== Jumper Wires
+
+image::jumper-cables.jpg[]
+
+You'll need jumper wires to connect your Raspberry Pi's header to the breadboard and create connections between components on the breadboard.  You'll need female-to-male jumpers to connect the Rasperry Pi's header to the breadboard.  Other connections will need male-to-male jumpers.  Get a selection of different colours, so you can easily distinguish power, ground and control connections, and a selection of different lengths -- long ones that let you easily reach the breadboard from the Pi and short ones so that connections on the breadboard don't become a tangled mess.
+
+=== LEDs
+
+image::leds.jpg[]
+
+Coloured light-emitting diodes -- for basic output.
+
+
+=== Push Buttons
+
+image::pushbuttons.jpg[]
+
+Push buttons for user input.
+
+=== Resistors
+
+image::resistors.jpg[]
+
+2K&ohm; resistors to reduce current flow through the Raspberry Pi and ensure we don't burn out it's delicate circuits.
+
+100K&ohm; resistors for to pull input voltages up or down as necessary.
+
+
+=== Other fun components
+
+Don't stick with our choices.  Experiment with other components: buzzers, RGB LEDs, passive infrared detectors...
