@@ -23,7 +23,7 @@ Getting Physical
 
 include::blink.asciidoc[]
 
-include::pin-type[]
+include::blink-pin-type[]
 
 include::blink-button.asciidoc[]
 
