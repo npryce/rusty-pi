@@ -5,6 +5,8 @@ What to buy.  No Rust learning in this chapter.
 
 You will need some hardware bits and bobs to build the circuits in this book.
 
-A breadboard.  A half-size breadboards are about the same size as the Raspberry Pi and will be plenty big enough for the circuits we will build in this book.
+.A Breadboard.  
+
+A half-size breadboards are about the same size as the Raspberry Pi and will be plenty big enough for the circuits we will build in this book.
 
 image::breadboard.jpg[]
