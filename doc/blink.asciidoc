@@ -12,9 +12,8 @@ You will need:
 
  * a breadboard
  * one LED
- * one 2 kOhm resistor
- * three female-to-male jumpers
- * One male-to-male jumper
+ * one 1 kOhm resistor
+ * three long female-to-male jumpers
 
 .An LED connected to GPIO pin 18
 image::blink.svg[]
@@ -23,6 +22,7 @@ image::blink.svg[]
 === Using GPIO in Raspbian
 
 TODO
+
 
 === The Code
 
