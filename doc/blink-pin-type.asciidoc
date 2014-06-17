@@ -1,0 +1,5 @@
+== Defining a GPIO Pin Type
+
+Abstracting the I/O for GPIO into a convenient module to clarify our code. Make the Pin type usable from other programs.
+
+Introduces structs and traits, destructors, defining new modules and organising a program into multiple files.
