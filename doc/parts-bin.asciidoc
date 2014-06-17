@@ -34,9 +34,9 @@ Push buttons for user input.
 
 image::resistors.jpg[]
 
-2K&ohm; resistors to reduce current flow through the Raspberry Pi and ensure we don't burn out it's delicate circuits.
+2kΩ resistors to reduce current flow through the Raspberry Pi and ensure we don't burn out it's delicate circuits.
 
-100K&ohm; resistors for to pull input voltages up or down as necessary.
+100kΩ resistors for to pull input voltages up or down as necessary.
 
 
 === Other fun components
