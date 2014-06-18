@@ -14,11 +14,12 @@ Getting Started
 
 include::a-look-at-the-raspberry-pi.asciidoc[]
 
+include::parts-bin.asciidoc[]
+
 include::compile-the-compiler.asciidoc[]
 
 include::dev-environment.asciidoc[]
 
-include::parts-bin.asciidoc[]
 
 Getting Physical
 ================
