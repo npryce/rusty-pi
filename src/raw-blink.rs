@@ -1,5 +1,5 @@
+use std::io::File;
 use std::io::timer::sleep;
-use std::io::{File};
 
 fn main() {
     File::create(&Path::new("/sys/class/gpio/export")).write_str("18").unwrap();

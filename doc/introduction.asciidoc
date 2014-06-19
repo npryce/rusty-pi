@@ -6,12 +6,15 @@ by Mozilla.
 We are currently enjoying a renaissance of programming language
 design, at least for application development.  New languages like
 Scala, Clojure, F# and Swift are displacing Java, C#, Ruby and
-Objective-C.  But for _system_ programming, in which precise control
-over memory and hardware are necessary, C and $$C++$$ still rule the
-roost.  Unfortunately C and $$C++$$ are error prone -- it is so very easy
-for programmers to make mistakes that corrupt memory, crash the
-running program or, worse, allow attackers to bypass security and
-steal data from or take control of remote computers.
+Objective-C.  Haskell is bubbling under.  Financial institutions have
+embraced ML and array processing languages like K and Q. 
+
+But for _system_ programming, in which precise control over memory and
+hardware are necessary, C and $$C++$$ still rule the roost.
+Unfortunately C and $$C++$$ are error prone -- it is so very easy for
+programmers to make mistakes that corrupt memory, crash the running
+program or, worse, allow attackers to bypass security and steal data
+from or take control of remote computers.
 
 I'm excited about Rust because it applies the latest research in type
 theory to a system programming language to catch many of the errors
@@ -98,12 +101,15 @@ popular, widely supported language.
 
 More information about Rust can be found at the following sites.
 
- * link:http://www.rust-lang.org[The Rust Website]
+ * http://www.rust-lang.org The Rust Website
 
- * link:http://doc.rust-lang.org/tutorial.html[The Rust Tutorial]
+ * http://doc.rust-lang.org/tutorial.html The Rust Tutorial
 
- * link:http://doc.rust-lang.org/rust.html[The Rust Reference Manual]
+ * http://doc.rust-lang.org/rust.html The Rust Reference Manual
 
- * link:http://www.rustforrubyists.com/[Rust for Rubyists] by Steve
-   Klabnik: a book about Rust aimed primarily at Ruby programmers.
+ * http://www.rustbyexample.com/ Rust by Example, an interactive
+   tutorial that lets you write and run Rust code in your web browser.
+
+ * http://www.rustforrubyists.com Rust for Rubyists by Steve
+   Klabnik, a book about Rust aimed primarily at Ruby programmers.
 

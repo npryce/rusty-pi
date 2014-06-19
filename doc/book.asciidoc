@@ -3,6 +3,9 @@ Physical Computing with Rust and the Raspberry Pi
 Nat Pryce
 {version}
 :doctype: book
+:ascii-ids:
+
+include::macros.asciidoc[]
 
 include::introduction.asciidoc[]
 
@@ -14,11 +17,11 @@ Getting Started
 
 include::a-look-at-the-raspberry-pi.asciidoc[]
 
-include::parts-bin.asciidoc[]
-
 include::compile-the-compiler.asciidoc[]
 
 include::dev-environment.asciidoc[]
+
+include::parts-bin.asciidoc[]
 
 
 Getting Physical

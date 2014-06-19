@@ -25,7 +25,7 @@ out/%: src/%.rs src/pi.rs
 
 out/pdf/book.pdf: out/docbook/book.xml
 	@mkdir -p $(dir $@)
-	dblatex -o $@ --fig-path=doc $<
+	dblatex -o $@ --fig-path=doc -P latex.encoding=utf8 $<
 
 out/docbook/book.xml: $(book_src) $(rust_src)
 	@mkdir -p $(dir $@)

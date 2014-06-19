@@ -1,0 +1,2 @@
+:ohm: Ω
+:kohm: k{ohm}

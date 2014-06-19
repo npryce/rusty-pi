@@ -12,7 +12,7 @@ You will need:
 
  * a breadboard
  * one LED
- * one 1 kOhm resistor
+ * one 220{ohm} resistor
  * three long female-to-male jumpers
 
 .An LED connected to GPIO pin 18
