@@ -61,20 +61,20 @@ pi-rust in your home directory.
 
 [source,sh]
 -------------------------------------------------------------------
-% ./configure --target-triples=arm-unknown-linux-gnueabihf --prefix=$HOME/pi-rust && make && make install
+% ./configure --target=arm-unknown-linux-gnueabihf --prefix=$HOME/pi-rust && make && make install
 -------------------------------------------------------------------
 
-This will take a long time to complete.  When it's finished, we can
-test it by compiling a simple Rust program and running it on the Pi.
-But until then, you've got more than enough time to go have a cup of
-tea. Or two.
+The build will take a long time to complete.  When it's finished, you
+can test it by compiling a simple Rust program and running it on the
+Pi.  But until then, you've got more than enough time to go have a cup
+of tea. Or two.
 
 
 === Testing the Cross-Compiler
 
 To test the cross-compiler and deployment of compiled programs onto
-the Pi, we'll compile a traditional Hello World program.  Here's Hello
-World in Rust:
+the Raspberry Pi, we'll compile a traditional Hello World program.
+Here's Hello World in Rust:
 
 -------------------------------------------------------------------
 include::../src/hello.rs[]
