@@ -1,9 +1,10 @@
 
 pi=192.168.1.13
 
-linker=../tools/arm-bcm2708/arm-bcm2708hardfp-linux-gnueabi/bin/arm-bcm2708hardfp-linux-gnueabi-g++
+rust_src:=$(wildcard src/*.rs)
+rust_programs:=$(patsubst src/%.rs,out/%,$(filter-out %-err.rs,$(rust_src)))
+rust_compile_errors:=$(patsubst src/%-err.rs,out/error/%.txt,$(rust_src))
 
-rust_src:=$(shell find src/ -name *.rs)
 book_src:=$(wildcard doc/*.asciidoc)
 book_images:=$(wildcard doc/*.svg doc/*.jpg doc/*.png)
 
@@ -12,22 +13,18 @@ version:=$(shell git describe --tags --always --dirty=-local --match='v*' | sed 
 asciidoc_icondir=/usr/share/asciidoc/icons
 asciidoc_icons:=$(shell find $(asciidoc_icondir) -type f -name '*.*')
 
-all: pdf html
+linker=../tools/arm-bcm2708/arm-bcm2708hardfp-linux-gnueabi/bin/arm-bcm2708hardfp-linux-gnueabi-g++
+rustflags=-L . --target arm-unknown-linux-gnueabihf -C linker=$(linker)
+
+all: pdf $(rust_programs)
+
 pdf: out/pdf/book.pdf
-html: out/html/book.html
-
-deployed: out/blink out/button out/hello out/signals out/raw-blink
-	rsync $^ $(pi):
-
-out/%: src/%.rs src/pi.rs
-	@mkdir -p $(dir $@)
-	rustc -o $@ -L . --target arm-unknown-linux-gnueabihf -C linker=$(linker) $<
 
 out/pdf/book.pdf: out/docbook/book.xml
 	@mkdir -p $(dir $@)
 	dblatex -o $@ --fig-path=doc -P latex.encoding=utf8 $<
 
-out/docbook/book.xml: $(book_src) $(rust_src)
+out/docbook/book.xml: $(book_src) $(rust_src) $(rust_compile_errors)
 	@mkdir -p $(dir $@)
 	asciidoc \
 		-a icons \
@@ -35,29 +32,20 @@ out/docbook/book.xml: $(book_src) $(rust_src)
 		-b docbook45 \
 		-o $@ doc/book.asciidoc
 
-out/html/book.html: $(book_src) $(rust_src)
-out/html/book.html: $(book_images:doc/%=out/html/%)
-out/html/book.html: $(asciidoc_icons:$(asciidoc_icondir)/%=out/html/images/icons/%)
-out/html/book.html:
+out/%: src/%.rs
 	@mkdir -p $(dir $@)
-	asciidoc \
-		-a icons \
-		-a version="$(version)" \
-		-o $@ doc/book.asciidoc
+	rustc $(rustflags) -o $@ $<
 
-out/html-chunked/index.html: out/docbook/book.xml
-
-out/html/%: doc/%
+out/error/%.txt: src/%-err.rs
 	@mkdir -p $(dir $@)
-	cp $< $@
+	-rustc $(rustflags) -o $(dir $@)/$* $< > $@ 2>&1
 
-out/html/images/icons/%: $(asciidoc_icondir)/%
-	@mkdir -p $(dir $@)
-	cp $< $@
+deployed: $(rust_programs)
+	rsync $^ $(pi):
 
 clean:
 	rm -rf out/
 
 again: clean deployed
 
-.PHONY: all html pdf deployed clean again
+.PHONY: all pdf deployed clean again tmp
