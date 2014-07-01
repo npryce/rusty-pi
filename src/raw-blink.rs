@@ -2,14 +2,17 @@ use std::io::File;
 use std::io::timer::sleep;
 
 fn main() {
-    File::create(&Path::new("/sys/class/gpio/export")).write_str("18").unwrap();
+    (write!(File::create(&Path::new("/sys/class/gpio/export")), "{}", 18))
+        .ok().expect("failed to export pin");
     
     let mut pin_file = File::create(&Path::new("/sys/class/gpio/gpio18/value"));
     
     for i in range(1,21) {
-        pin_file.write_str((i%2).to_str()).unwrap();
+        (write!(pin_file, "{}", i%2))
+            .ok().expect("failed to write pin value");
         sleep(500);
     }
     
-    File::create(&Path::new("/sys/class/gpio/unexport")).write_str("18").unwrap();
+    (write!(File::create(&Path::new("/sys/class/gpio/unexport")), "{}", 18))
+        .ok().expect("failed to unexport pin");
 }

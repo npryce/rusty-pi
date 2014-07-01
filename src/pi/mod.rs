@@ -2,18 +2,13 @@
 #![allow(dead_code)]
 
 pub mod gpio {
+    use std::fmt::Show;
     use std::io::{File,Open,Write,ReadWrite,SeekSet,IoResult,IoError,OtherIoError};
-    
-    fn write_line_to<T:ToStr>(path: &str, value: T) -> IoResult<()> {
-        let mut f = try!(File::open_mode(&Path::new(path), Open, Write));
-        try!(f.write_str(value.to_str()));
-        f.flush()
-    }
     
     #[deriving(Show)]
     pub enum Direction {In, Out}
     impl Direction {
-        fn to_gpio(self) -> &str {
+        fn to_gpio(self) -> &'static str {
             match self {
                 In => "in",
                 Out => "out"
@@ -24,7 +19,7 @@ pub mod gpio {
     #[deriving(Show)]
     pub enum Edge {NoInterrupt, RisingEdge, FallingEdge, BothEdges}
     impl Edge {
-        fn to_gpio(self) -> &str {
+        fn to_gpio(self) -> &'static str {
             match self {
                 NoInterrupt => "none",
                 RisingEdge => "rising",
@@ -40,9 +35,14 @@ pub mod gpio {
         file : File
     }
     
+    fn write_value_to<T:Show>(path: &str, value: T) -> IoResult<()> {
+        let mut f = try!(File::open_mode(&Path::new(path), Open, Write));
+        write!(f, "{}", value)
+    }
+    
     impl Pin {
-        fn write_to_device_file<T:ToStr>(&mut self, filename: &str, value: T) -> IoResult<()> {
-            write_line_to(format!("/sys/devices/virtual/gpio/gpio{:u}/{:s}", self.port, filename), value)
+        fn write_to_device_file<T:Show>(&mut self, filename: &str, value: T) -> IoResult<()> {
+            write_value_to(format!("/sys/devices/virtual/gpio/gpio{:u}/{:s}", self.port, filename).as_slice(), value)
         }
         
         pub fn set_direction(&mut self, direction : Direction) -> IoResult<()> {
@@ -57,7 +57,7 @@ pub mod gpio {
             try!(self.file.seek(0, SeekSet));
             let value_str = try!(self.file.read_to_str());
             
-            match from_str::<uint>(value_str.trim()) {
+            match from_str::<uint>(value_str.as_slice().trim()) {
                 Some(value) => Ok(value),
                 None => Err(IoError {
                     kind: OtherIoError,
@@ -68,21 +68,21 @@ pub mod gpio {
         }
         
         pub fn set_value(&mut self, value : uint) -> IoResult<()> {
-            try!(self.file.write_str(value.to_str()));
+            try!(write!(self.file, "{}", value));
             self.file.flush()
         }
     }
     
     impl Drop for Pin {
         fn drop(&mut self) {
-            drop(write_line_to("/sys/class/gpio/unexport", self.port));
+            drop(write_value_to("/sys/class/gpio/unexport", self.port));
         }
     }
     
     pub fn open_pin(port: uint) -> IoResult<Pin> {
-        try!(write_line_to("/sys/class/gpio/export", port));
+        try!(write_value_to("/sys/class/gpio/export", port));
         let pin_path = format!("/sys/class/gpio/gpio{:u}/value", port);
         let pin_file = try!(File::open_mode(&Path::new(pin_path), Open, ReadWrite));
         Ok(Pin{port:port, file:pin_file})
-    }    
+    }
 }
