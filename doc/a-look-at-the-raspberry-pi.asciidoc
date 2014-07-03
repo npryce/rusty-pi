@@ -4,9 +4,10 @@
 
 The Raspberry Pi is a credit-card-sized single-board computer developed 
 by the Raspberry Pi Foundation to promote the teaching  of basic computer
-science in schools.
+science.  It has become very popular for teaching children in schools 
+and code clubs and also among adult hobbyists, makers and hardware hackers.
 
-include::pi-photo.asciidoc[]
+include::pi-top.asciidoc[]
 
 The Pi is built around a 32-bit ARMv6 system-on-a-chip (SoC)
 footnote:[the Broadcom BCM2835], has 512MB of RAM, 3D accelerated
@@ -33,7 +34,7 @@ behave the same on any Linux distribution.
 === Interfaces
 
 As well as the usual USB, Ethernet and video ports, the Raspberry Pi
-has a 24-pin header at its top left corner that exposes useful
+has a 24-pin header at its top, left-hand corner that exposes useful
 interfaces for controlling hardware: a UART serial interface, eight
 GPIO pins for general purpose digital IO, two I2C buses and an SPI
 bus, that can be used to control a variety of hardware devices,
@@ -60,7 +61,7 @@ text will refer to the pins by the same names.
 image::pi.svg[]
 
 Because of these difficulties, some people like to use a "breakout
-board" when connecting their Pi to hardware. A breakout board plugs
+board" co connect their Pi to hardware. A breakout board plugs
 into the header and connects the pins to female headers that are
 organised in logical groups and clearly labelled.  They only cost a
 few pounds and can be very convenient.
@@ -82,9 +83,9 @@ Although the Raspberry Pi can be used as a Linux PC with a graphical
 desktop interface, I find it a bit slow for software development
 compared to a laptop or desktop PC.  When using my Pi to control
 hardware, I prefer to write software on my laptop, compile it for the
-Pi with a cross-compiler footnote:[a compiler that runs on one
+Pi with a cross-compiler footnote:[a cross-compiler runs on one
 architecture, such as my laptop running Ubuntu on an Intel x86, and
-outputs programs for another architecture, such as the Raspberry Pi
+outputs machine code for another architecture, such as the Raspberry Pi
 running Raspbian on an ARM], and deploy the compiled program onto the
 Pi when I want to test it against real hardware.
 

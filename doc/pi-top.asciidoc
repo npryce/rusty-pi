@@ -1,0 +1,9 @@
+[[pi-top]]
+.Top view of the Raspberry Pi model B
+[image_credit="Gijsbert Peijs"]
+[image_copyright="14-09-2012"]
+[image_license="CC BY 2.0"]
+[image_source="https://www.flickr.com/photos/gijsbertpeijs/7988256711"]
+[image_modification="cropped, colour balance adjusted"]
+image::pi-top.jpg[width="320px"]
+
