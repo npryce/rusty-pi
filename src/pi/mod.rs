@@ -42,7 +42,8 @@ pub mod gpio {
     
     impl Pin {
         fn write_to_device_file<T:Show>(&mut self, filename: &str, value: T) -> IoResult<()> {
-            write_value_to(format!("/sys/devices/virtual/gpio/gpio{:u}/{:s}", self.port, filename).as_slice(), value)
+            write_value_to(format!("/sys/devices/virtual/gpio/gpio{:u}/{:s}", 
+                                   self.port, filename).as_slice(), value)
         }
         
         pub fn set_direction(&mut self, direction : Direction) -> IoResult<()> {
