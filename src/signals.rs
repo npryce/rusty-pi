@@ -5,7 +5,7 @@ extern crate rustuv;
 use std::io::signal::{Listener, Interrupt};
 
 #[start]
-fn start(argc: int, argv: **u8) -> int {
+fn start(argc: int, argv: *const *const u8) -> int {
     green::start(argc, argv, rustuv::event_loop, main)
 }
 

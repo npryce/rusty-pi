@@ -1,10 +1,10 @@
 
 fn main() {
-    let mut ibox = box 10;
+    let ibox = box 10;
     use_boxed_value(ibox);
-    println!("{}", ibox);
+    println!("finished with {}", ibox);
 }
 
-fn use_boxed_value(iref: &mut int) {
-    *iref = 20;
+fn use_boxed_value(iref: &int) {
+    println!("borrowing {}", iref);
 }
