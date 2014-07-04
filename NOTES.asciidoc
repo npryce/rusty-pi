@@ -1,0 +1,2 @@
+
+* Need to explicitly set the state of the GPIO pin on creation of the Pin struct -- unexporting does not reset it.
