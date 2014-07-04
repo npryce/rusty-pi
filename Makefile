@@ -18,8 +18,8 @@ asciidoc_icons:=$(shell find $(asciidoc_icondir) -type f -name '*.*')
 linker=../tools/arm-bcm2708/arm-bcm2708hardfp-linux-gnueabi/bin/arm-bcm2708hardfp-linux-gnueabi-g++
 rustflags=-L . --target arm-unknown-linux-gnueabihf -C linker=$(linker)
 
-all: pdf $(rust_programs)
-
+all: pdf exes
+exes: $(rust_programs)
 pdf: out/pdf/book.pdf
 
 out/pdf/book.pdf: out/docbook/book.xml
@@ -55,4 +55,4 @@ clean:
 
 again: clean deployed
 
-.PHONY: all pdf deployed clean again tmp
+.PHONY: all pdf exes deployed clean again tmp
