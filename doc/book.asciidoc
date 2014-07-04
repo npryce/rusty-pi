@@ -1,5 +1,5 @@
-Physical Computing with Rust and the Raspberry Pi
-=================================================
+Exploring Rust through Physical Computing with the Raspberry Pi
+===============================================================
 Nat Pryce
 {version}
 :doctype: book
@@ -12,8 +12,7 @@ include::introduction.asciidoc[]
 include::rust-whats-the-big-idea.asciidoc[]
 
 
-Getting Started
-===============
+= Getting Started
 
 include::a-look-at-the-raspberry-pi.asciidoc[]
 
@@ -21,11 +20,8 @@ include::compile-the-compiler.asciidoc[]
 
 include::dev-environment.asciidoc[]
 
-include::parts-bin.asciidoc[]
 
-
-Getting Physical
-================
+= Getting Physical
 
 include::blink.asciidoc[]
 
@@ -36,3 +32,4 @@ include::blink-button.asciidoc[]
 include::signals.asciidoc[]
 
 include::i2c.asciidoc[]
+
