@@ -7,8 +7,7 @@ use pi::gpio::{open_pin,Out};
 mod pi;
 
 fn run(port : uint, count: uint) -> IoResult<()> {
-    let mut pin = try!(open_pin(port));
-    try!(pin.set_direction(Out));
+    let mut pin = try!(open_pin(port,Out));
     
     for i in range(0,count) {
         println!("{} / {}", i+1, count);
