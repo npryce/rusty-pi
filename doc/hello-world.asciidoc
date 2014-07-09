@@ -1,0 +1,48 @@
+== What Can We Learn From Hello World?
+
+Let's have another look at the Hello World program we wrote to test
+our build toolchain.  Although short, it does demonstrate some notable
+features of Rust that we will explore in more depth as we go through
+the book.
+
+.The Hello World Program
+-----------------------------------------------
+include::../src/hello.rs[]
+-----------------------------------------------
+
+The program defines a single function called `main`, which is the
+program's entry point.  To be pedantic, `main` is the entry point of
+the program's _main task_.  A Rust program is organised as a tree of
+concurrent tasks that communicate by sending messages to one
+another. The program starts by running the main task. The main task
+spawns other tasks and sets up communication channels between them.
+
+The syntax for defining functions is slightly different from that of
+C-like languages, but still quite recognisable, especially if you've
+used to Python, Ruby or JavaScript.  Functions definitions start with
+the `fn` keyword, followed by the name of the function.  Parameters
+are defined between parentheses.  In this program, we define a
+function called `main` that has no parameters.  The main function does
+not return a value, and so, unlike in C, we do not need to specify its
+result type.
+
+If you are used to C, Java, or many other languages, you may be
+wondering about the lack of import or #include statements.  Where does
+the definition of `println!` come from?  Is it built in to the
+language?  Like C, Rust is a small language with few built-in
+constructs. Println is therefore defined in the standard library.
+However, commonly used features defined in the various modules of the
+standard library are also reexported from a module called the
+"prelude".  The contents of the prelude are implicitly imported into
+every module, making the most common standard types and functions
+available without boilerplate.  This lets Rust remain a a small
+language with as much functionality as possible defined in libraries,
+while also giving the programmer the convenience of a rich language
+can be used without lots of boilerplate to import functionality from
+libraries.
+
+TBD...
+
+macros -- not like C
+
+println -- is type safe

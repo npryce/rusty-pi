@@ -20,6 +20,7 @@ include::compile-the-compiler.asciidoc[]
 
 include::dev-environment.asciidoc[]
 
+include::hello-world.asciidoc[]
 
 = Getting Physical
 

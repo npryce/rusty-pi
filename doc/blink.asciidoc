@@ -21,7 +21,95 @@ image::blink.svg[]
 
 === Using GPIO in Raspbian
 
-TODO
+Raspbian exposes each GPIO pin to user space processes as a directory
+of text files in the /sys filesystem. Because the pins are controlled
+by reading and writing text files, we can easily use GPIO from any
+language, even shell scripts.
+
+The GPIO pins are not always visible in the /sys filesystem. To start
+using a pin, a program must "export" it to user space by writing the
+number of the pin it wants to use into the control file
+/sys/class/gpio/export. This requires root privileges.
+
+For example, the following shell command will export pin 18 to user
+space, using the sudo to run `tee` command with elevated privileges so
+that it can write to the /sys/class/gpio/export file.
+
+----------------------------------------------
+% echo 18 | sudo tee /sys/class/gpio/export
+18
+----------------------------------------------
+
+If that succeeds, the kernel will make the pin's control files
+available in a subdirectory of /sys/class/gpio that is named after the
+pin number, in this case /sys/class/gpio/gpio18/.
+
+----------------------------------------------
+% ls /sys/class/gpio/gpio18/
+active_low  direction  edge  power  subsystem  uevent  value
+----------------------------------------------
+
+The most commonly used files are direction and value. The `direction`
+file reports (when read) and controls (when written) whether the pin
+is used for input or output. Reading from the `value` file reports the
+voltage level at the pin.  A high voltage is represented as the text
+"1" and a low voltage as "0". If the pin has been configured for
+output, writing to the value file will set the voltage level of the
+pin.
+
+With this knowledge we can blink the LED connected to pin 18 from the
+shell.
+
+First, set the pin to output mode:
+
+----------------------------------------------
+% echo out | sudo tee /sys/class/gpio/gpio18/direction
+out
+----------------------------------------------
+
+Then write 1 into the pin's value file.  The LED should light up.
+
+----------------------------------------------
+% echo 1 | sudo tee /sys/class/gpio/gpio18/value
+1
+----------------------------------------------
+
+Turn the LED off again by writing 0 into the pin's value file.
+
+----------------------------------------------
+% echo 0 | sudo tee /sys/class/gpio/gpio18/value
+0
+----------------------------------------------
+
+When we've finished using the pin we should unexport it, which removes its control files from the filesystem.
+
+----------------------------------------------
+% echo 18 | sudo tee /sys/class/gpio/unexport
+18
+----------------------------------------------
+
+.The Importance of Error Handling
+[TIP]
+=======================================================================
+It's best to export a GPIO pin just before we want to use it and
+unexport the pin as soon as we've finished with it.  This helps avoid
+interference between processes trying to use the same pin. When a pin
+has been exported to user space, further writes to the export file
+will fail.
+
+----------------------------------
+% echo 18 | sudo tee /sys/class/gpio/export
+18
+tee: /sys/class/gpio/export: Device or resource busy
+% echo $?
+1
+----------------------------------
+
+A process will not be able to disrupt ongoing GPIO, as long as it
+checks for I/O errors when exporting its pins.  In shell scripts and C
+it's too easy to ignore I/O failures and allow erroneous behaviour to
+occur.  Rust does not let us be so lazy, as we will see.
+=======================================================================
 
 
 === The Code

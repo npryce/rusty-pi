@@ -76,6 +76,7 @@ To test the cross-compiler and deployment of compiled programs onto
 the Raspberry Pi, we'll compile a traditional Hello World program.
 Here's Hello World in Rust:
 
+.Hello World
 -------------------------------------------------------------------
 include::../src/hello.rs[]
 -------------------------------------------------------------------
