@@ -128,4 +128,3 @@ pub fn open_pin(port: uint, direction: Direction) -> IoResult<Pin> {
     
     Ok(pin)
 }
-
