@@ -61,15 +61,16 @@ text will refer to the pins by the same names.
 image::pi.svg[]
 
 Because of these difficulties, some people like to use a "breakout
-board" co connect their Pi to hardware. A breakout board plugs
-into the header and connects the pins to female headers that are
-organised in logical groups and clearly labelled.  They only cost a
-few pounds and can be very convenient.
+board" to connect their Pi to hardware. A breakout board plugs into
+the header and routes the pins to female headers that are organised in
+logical groups and clearly labelled.  They only cost a few pounds and
+can be very convenient.
 
-An even cheaper option is to print the header pin identifiers on a
-small piece of paper and push it down over the pins, so that the pins
-stick through the paper next to their identifiers.  It's a low tech
-solution but it works just fine.
+An ingenious, cheap alternative to a breakout board is to print the
+header pin identifiers on a small piece of paper that you push over
+the pins, so that the pins stick through the paper next to their
+identifiers.  You can download a printable PDF by Simon Monk from
+http://www.doctormonk.com/2013/02/raspberry-pi-and-breadboard-raspberry.html.
 
 === Protecting Your Pi
 

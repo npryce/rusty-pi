@@ -6,6 +6,45 @@ hardware.  It will also demonstrate some more Rust language concepts,
 including modules, control flow, ownership and lifetimes, I/O and 
 error handling.
 
+== What is GPIO?
+
+Eight of the pins on the Raspberry Pi's header are dedicated to
+general-purpose input/output, or GPIO for short. Each pin can be
+controlled by software to read or send a digital signal -- that is,
+read or set whether the voltage level at the pin is high or low.
+
+The Raspbian operating system makes the GPIO pins available to
+user-space programs as files in the /sys filesystem. Getting to grips
+with GPIO programming can be pretty confusing at first because of the
+multitude of ways in which GPIO pins are identified in the Raspberry
+Pi documentation.
+
+The pins on the header connect to the pins of the system-on-a-chip
+(SoC) at the heart of the Raspberry Pi.  Each SoC pin has a number.
+Twenty six of the SoC pins are routed to the header, but those twenty
+six pins do not have consecutive numbers. The Raspberry Pi
+documentation fives the header pins numbers 1 to 26 and also uses the
+names GP0 to GP7 for the eight header pins dedicated to GPIO, but
+neither the header pin number nor the GP0 to GP7 names has any
+relation to the number used by the SoC for that pin.
+
+The operating system's programming interface for GPIO addresses the
+pins _only_ by their SoC pin numbers.  When programming GPIO, we can
+ignore the header pin number and the GP0 to GP7 names used for the
+GPIO pins.  We only need to know the header pin number when connecting
+physical wires to physical pins.
+
+To avoid confusion this book only refers to GPIO pins by
+their SoC numbers and does not use the names GP0 to GP7. The circuit
+diagrams show how the SoC pin numbers relate to the physical header
+pins.
+
+So let's have a look at the circuit we need to build to blink an LED
+with GPIO.
+
+TIP: If you buy a breakout board, make that it labels the GPIO pins
+     with their the SoC numbers, not GP0...GP7.
+
 === The Circuit
 
 You will need:
@@ -19,16 +58,16 @@ You will need:
 image::blink.svg[]
 
 
-=== Using GPIO in Raspbian
+=== Controlling the GPIO Pin from Software
 
-Raspbian exposes each GPIO pin to user space processes as a directory
-of text files in the /sys filesystem. Because the pins are controlled
-by reading and writing text files, we can easily use GPIO from any
-language, even shell scripts.
+The Raspbian operating system exposes each GPIO pin to user space
+processes as a directory of text files in the /sys filesystem. Because
+the pins are controlled by reading and writing text files, we can
+easily use GPIO from any language, even shell scripts.
 
-The GPIO pins are not always visible in the /sys filesystem. To start
-using a pin, a program must "export" it to user space by writing the
-number of the pin it wants to use into the control file
+The GPIO pins are not initially visible in the /sys filesystem. To
+start using a pin, a program must "export" it to user space by writing
+the number of the pin it wants to use into the control file
 /sys/class/gpio/export. This requires root privileges.
 
 For example, the following shell command will export pin 18 to user
@@ -74,14 +113,33 @@ Then write 1 into the pin's value file.  The LED should light up.
 1
 ----------------------------------------------
 
-Turn the LED off again by writing 0 into the pin's value file.
+Write 0 into the pin's value file to turn the LED off.
 
 ----------------------------------------------
 % echo 0 | sudo tee /sys/class/gpio/gpio18/value
 0
 ----------------------------------------------
 
-When we've finished using the pin we should unexport it, which removes its control files from the filesystem.
+Do that in a loop with sleep to blink the LED until you press
+Control-C.
+
+----------------------------------------------
+% while true
+> do
+>     echo 1 | sudo tee /sys/class/gpio/gpio18/value
+>     sleep 1
+>     echo 0 | sudo tee /sys/class/gpio/gpio18/value
+>     sleep 1
+> done
+0
+1
+0
+1
+...
+----------------------------------------------
+
+When we've finished using the pin we should unexport it, which removes
+its control files from the filesystem.
 
 ----------------------------------------------
 % echo 18 | sudo tee /sys/class/gpio/unexport
@@ -111,6 +169,8 @@ it's too easy to ignore I/O failures and allow erroneous behaviour to
 occur.  Rust does not let us be so lazy, as we will see.
 =======================================================================
 
+Now we understand the basics of GPIO in Rasbian, let's look at how to
+write that in Rust.
 
 === The Code
 
