@@ -15,29 +15,9 @@ use native::io::file::open;
 #[deriving(Copy,Show)]
 pub enum Direction {In, Out}
 
-impl Direction {
-    fn to_gpio(self) -> &'static str {
-        match self {
-            In => "in",
-            Out => "out"
-        }
-    }
-}
-
 #[deriving(Copy,Show)]
 pub enum Edge {NoInterrupt, RisingEdge, FallingEdge, BothEdges}
 
-impl Edge {
-    fn to_gpio(self) -> &'static str {
-        match self {
-            NoInterrupt => "none",
-            RisingEdge => "rising",
-            FallingEdge => "falling",
-            BothEdges => "both"
-        }
-    }
-}
-    
 pub struct Pin {
     port : uint,
     fd : FileDesc
@@ -68,11 +48,19 @@ impl Pin {
     }
     
     pub fn set_direction(&mut self, direction : Direction) -> IoResult<()> {
-        self.write_to_device_file("direction", direction.to_gpio())
+        self.write_to_device_file("direction", match direction {
+            In => "in",
+            Out => "out"
+        })
     }
     
     pub fn set_interrupt(&mut self, edge : Edge) -> IoResult<()> {
-        self.write_to_device_file("edge", edge.to_gpio())
+        self.write_to_device_file("edge", match edge {
+            NoInterrupt => "none",
+            RisingEdge => "rising",
+            FallingEdge => "falling",
+            BothEdges => "both"
+        })
     }
     
     pub fn get_value(&mut self) -> IoResult<uint> {
