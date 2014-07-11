@@ -1,14 +1,14 @@
 
 use std::io::timer::{Timer,sleep};
-use pi::gpio::{open_pin,In,Out};
+use pi::gpio::{open_pin,Pin,In,Out};
 
 mod pi;
 
 
-fn button_poller(out: SyncSender<uint>) {
-    let mut button_pin = open_pin(23,In).unwrap();
+fn poll_changes(mut button_pin : Pin, out: SyncSender<uint>) {
+    let mut last_button_state = button_pin.get_value().unwrap();
     
-    let mut last_button_state = 2u; // to guarantee the first button press is sent
+    out.send(last_button_state);
     
     loop {
         let button_state = button_pin.get_value().unwrap();
@@ -22,27 +22,38 @@ fn button_poller(out: SyncSender<uint>) {
 }
 
 
-fn blinker(button: Receiver<uint>) {
-    let mut led_pin = open_pin(18,Out).unwrap();
-    let mut timer = Timer::new().unwrap();
-    
-    let blink_timeout = timer.periodic(1000);
-    let mut led_state = 1u;
-    let mut button_state = 0u;
+fn blink(button: Receiver<uint>, mut led_pin : Pin) {
+    let mut timer = Timer::new().unwrap();    
     
     loop {
-        select! {
-            b = button.recv() => {button_state = b;},
-            _ = blink_timeout.recv() => {led_state = 1 - led_state;}
+        loop {
+            let mut button_state = button.recv();
+            
+            if button_state == 1 {
+                let mut led_state = 1u;
+                let blink_timeout = timer.periodic(1000);
+                
+                led_pin.set_value(led_state).unwrap();
+                
+                while button_state == 1 {
+                    select! {
+                        b = button.recv() => {button_state = b;},
+                        _ = blink_timeout.recv() => {led_state = 1 - led_state;}
+                    }
+                    
+                    led_pin.set_value(led_state*button_state).unwrap();
+                }
+            }
         }
-        
-        led_pin.set_value(led_state*button_state).unwrap();
     }
 }
 
-
+ 
 fn main() {
+    let button_pin = open_pin(23,In).unwrap();
+    let led_pin = open_pin(18,Out).unwrap();
     let (send, recv) = sync_channel(0);
-    spawn(proc() { button_poller(send); });
-    spawn(proc() { blinker(recv); });
+    
+    spawn(proc() { poll_changes(button_pin, send); });
+    spawn(proc() { blink(recv, led_pin); });
 }
