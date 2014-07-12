@@ -10,7 +10,7 @@ use std::rt::rtio;
 use std::rt::rtio::{SeekSet,RtioFileStream};
 use native::io::FileDesc;
 use native::io::file::open;
-
+use super::epoll::{IoEventSource,fd_t};
     
 #[deriving(Copy,Show)]
 pub enum Direction {In, Out}
@@ -95,6 +95,12 @@ impl Pin {
         let buf  = if value == 0 { b"0" } else { b"1" };
         
         self.fd.write(buf).map_err(error_rtio_to_io)
+    }
+}
+
+impl IoEventSource for Pin {
+    fn fd(&self) -> fd_t {
+        self.fd.fd()
     }
 }
 
