@@ -178,12 +178,23 @@ blinking lights, feel free to jump ahead, compile
 and run it onto your Pi before coming back here to examine into the 
 Rust features that are used in the program.
 
-=== First Step - Export and Unexport the Pin
+=== Export and Unexport the Pin
 
+TBD...
 
+=== Set the Pin's Direction
 
+TBD...
 
-=== The Code
+=== Set the Voltage Level
+
+TBD...
+
+=== Blink the LED
+
+TBD...
+
+=== Putting it All Together
 
 [[raw-blink]]
 ---------------------------------------------
