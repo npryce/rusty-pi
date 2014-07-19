@@ -1,0 +1,7 @@
+src/export-gpio-err.rs:7:31: 7:34 error: cannot determine a type for this bounded type parameter: cannot determine the type of this integer; add a suffix to specify the type explicitly
+src/export-gpio-err.rs:7     write!(export_file, "{}", pin);
+                                                       ^~~
+note: in expansion of format_args_method!
+<std macros>:3:9: 4:6 note: expansion site
+<std macros>:1:1: 5:2 note: in expansion of write!
+src/export-gpio-err.rs:7:5: 7:36 note: expansion site

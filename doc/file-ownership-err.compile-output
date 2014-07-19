@@ -1,0 +1,10 @@
+src/file-ownership-err.rs:9:5: 9:6 error: use of moved value: `f`
+src/file-ownership-err.rs:9     f.flush()
+                                ^
+src/file-ownership-err.rs:7:14: 7:15 note: `f` moved here because it has type `std::io::fs::File`, which is non-copyable (perhaps you meant to use clone()?)
+src/file-ownership-err.rs:7     use_file(f)
+                                         ^
+src/file-ownership-err.rs:14:5: 14:6 error: cannot borrow immutable argument `f` as mutable
+src/file-ownership-err.rs:14     f.write_str("hello")
+                                 ^
+error: aborting due to 2 previous errors

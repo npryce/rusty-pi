@@ -1,29 +1,26 @@
 == Rust - What's the Big Idea?
 
-Rust's goal: memory safety without runtime overhead.
+[quote, Alan Perlis]
+A language that doesn't affect the way you think about programming, is not worth knowing.
 
-Rust's novel idea (its "norvig"): values are moved, not copied, by default.
+Rust's big idea is _ownership_.
 
+Ownership, and a distinction between moving and copying data.
 
-=== Motivation
+Ok, two big ideas.
 
-Despite their flaws, C and C++ have compelling features that have made
-them popular system programming langugaes for several decades.:
+Ownership, a distinction between moving and copying data, and zero-overhead abstractions.
 
- * Manual memory management allows precise control over memory use and performance, which is useful in soft realtime applications (media, games) and hard realtime applications (hardware control).
- * No-cost abstractions -- defining and using new types does not impose any overhead. (Compare to Java, in which every new class uses memory to hold metadata used by the reflection APIs, which a program may not ever use).
- * Do not pay for what you do not use -- runtime features (and their attendant cost) are opted into, when you need them, and do not impose any overhead otherwise.
- * Low resource requirements -- no complex runtime such as a virtual machine performing just-in-time compilation and garbage collection.  Can be compiled to bare metal.
- * Straightforward translation to hardware (no longer true in the world of multicore and vector processing instructions)
- * Small language, with a rich selection of libraries
- * Easy to port to new architectures, and can be used on everything from 8-bit microprocessors to supercomputers.
- * Decades of work on optimising compilers (but hampered by C's semantics, so optimisations sometimes need to be guided by proprietary pragmas)
- * Mature tools (although often to help deal with error prone aspects of the language)
+Ok, three big ideas. 
+
+All three support Rust's principle goal: memory safety without runtime overhead.
 
 
 === Ownership, Transferring Ownership, and Borrowing
 
-TODO
+Rust's novel feature, which makes it a "perlis language" in my book, is that by default values are moved, not copied, by default.
+
+... more to come...
 
 This program does not compile.
 
@@ -34,7 +31,7 @@ include::../src/file-ownership-err.rs[]
 Error:
 
 -------------------------------------------------------
-include::../out/error/file-ownership.txt[]
+include::file-ownership-err.compile-output[]
 -------------------------------------------------------
 
 === Message-Passing Concurrency
@@ -42,4 +39,8 @@ include::../out/error/file-ownership.txt[]
 TODO
 
 Rust's ownership model extends to concurrency.  Disallows data races.
+
+
+
+=== Zero-Overhead Abstractions
 

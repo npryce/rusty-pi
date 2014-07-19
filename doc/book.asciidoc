@@ -30,7 +30,3 @@ include::blink-pin-type.asciidoc[]
 
 include::blink-button.asciidoc[]
 
-include::signals.asciidoc[]
-
-include::i2c.asciidoc[]
-

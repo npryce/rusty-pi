@@ -1,0 +1,11 @@
+src/box-ownership-err.rs:5:20: 5:24 error: use of moved value: `ibox`
+src/box-ownership-err.rs:5     println!("{}", ibox);
+                                              ^~~~
+note: in expansion of format_args!
+<std macros>:2:23: 2:77 note: expansion site
+<std macros>:1:1: 3:2 note: in expansion of println!
+src/box-ownership-err.rs:5:5: 5:26 note: expansion site
+src/box-ownership-err.rs:4:21: 4:25 note: `ibox` moved here because it has type `Box<int>`, which is non-copyable (perhaps you meant to use clone()?)
+src/box-ownership-err.rs:4     use_boxed_value(ibox);
+                                               ^~~~
+error: aborting due to previous error
