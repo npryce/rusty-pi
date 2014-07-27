@@ -3,9 +3,12 @@
 
 pi?=192.168.1.35
 
-rust_src:=$(wildcard src/*.rs)
-rust_programs:=$(patsubst src/%.rs,out/%,$(filter-out %-err.rs,$(rust_src)))
-rust_compile_errors:=$(patsubst src/%-err.rs,out/compile-output/%-err.compile-output,$(rust_src))
+rust_exe_src:=$(wildcard src/*.rs)
+rust_lib_src:=$(shell find src/ -path 'src/*/*.rs')
+rust_src:=$(rust_exe_src) $(rust_lib_src)
+
+rust_exes:=$(patsubst src/%.rs,out/%,$(filter-out %-err.rs,$(rust_exe_src)))
+rust_compile_errors:=$(patsubst src/%-err.rs,out/compile-output/%-err.compile-output,$(rust_exe_src))
 
 book_src:=$(wildcard doc/*.asciidoc)
 book_images:=$(wildcard doc/*.svg doc/*.jpg doc/*.png)
@@ -20,7 +23,7 @@ linker=../tools/arm-bcm2708/arm-bcm2708hardfp-linux-gnueabi/bin/arm-bcm2708hardf
 rustflags=-L . --target arm-unknown-linux-gnueabihf -C linker=$(linker)
 
 all: pdf exes
-exes: $(rust_programs)
+exes: $(rust_exes)
 pdf: out/pdf/book.pdf
 
 out/pdf/book.pdf: out/docbook/book.xml
@@ -35,7 +38,7 @@ out/docbook/book.xml: $(book_src) $(rust_src) $(rust_compile_errors)
 		-b docbook45 \
 		-o $@ doc/book.asciidoc
 
-out/%: src/%.rs
+out/%: src/%.rs $(rust_lib_src)
 	@mkdir -p $(dir $@)
 	rustc $(rustflags) -o $@ $<
 
@@ -49,7 +52,7 @@ endif
 	diff $@ doc/$*.compile-output
 
 
-deployed: $(rust_programs)
+deployed: $(rust_exes)
 	rsync $^ $(pi):
 
 clean:
