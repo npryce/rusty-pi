@@ -64,15 +64,15 @@ impl IoSelector {
         Ok(IoSelector{fd: fd})
     }
     
-    pub fn add<T:IoEventSource>(&mut self, event_source: &T, events: u32, id: uint) -> IoResult<()> {
+    pub fn add<'a, T:IoEventSource>(&'a mut self, event_source: &'a T, events: u32, id: uint) -> IoResult<()> {
         self.ctl(ADD, event_source, events, id)
     }
     
-    pub fn update<T:IoEventSource>(&mut self, event_source: &T, events: u32, id: uint) -> IoResult<()> {
+    pub fn update<'a, T:IoEventSource>(&'a mut self, event_source: &'a T, events: u32, id: uint) -> IoResult<()> {
         self.ctl(MOD, event_source, events, id)
     }
     
-    pub fn remove<T:IoEventSource>(&mut self, event_source: &T) -> IoResult<()> {
+    pub fn remove<'a, T:IoEventSource>(&'a mut self, event_source: &'a T) -> IoResult<()> {
         self.ctl(DEL, event_source, 0, 0)
     }
     
