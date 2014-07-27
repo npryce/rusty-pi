@@ -1,6 +1,7 @@
 
 #![allow(dead_code)]
 
+extern crate native;
 extern crate libc;
 
 use std::fmt::Show;
@@ -8,8 +9,8 @@ use std::io;
 use std::io::{File,IoResult,IoError,TimedOut,ShortWrite,OtherIoError};
 use std::rt::rtio;
 use std::rt::rtio::{SeekSet,RtioFileStream};
-use native::io::FileDesc;
-use native::io::file::open;
+use self::native::io::FileDesc;
+use self::native::io::file::open;
 use super::epoll::{IoEventSource,fd_t};
     
 #[deriving(Copy,Show)]

@@ -1,7 +1,7 @@
 
 fn main() {
-    let ibox = box 10;
-    use_boxed_value(ibox);
+    let ibox : Box<int> = box 10;
+    use_boxed_value(&*ibox);
     println!("finished with {}", ibox);
 }
 

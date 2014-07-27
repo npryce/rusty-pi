@@ -1,11 +1,12 @@
 
 #![allow(dead_code)]
 
+extern crate native;
 extern crate libc;
 
 use self::libc::{c_int,close};
 use std::io::{IoResult,IoError};
-pub use native::io::file::fd_t;
+pub use self::native::io::file::fd_t;
 
 pub static CLOEXEC : u32 = 02000000;
 
