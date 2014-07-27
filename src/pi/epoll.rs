@@ -65,41 +65,22 @@ impl IoSelector {
     }
     
     pub fn add<T:IoEventSource>(&mut self, event_source: &T, events: u32, id: uint) -> IoResult<()> {
-        self.add_fd(event_source.fd(), events, id)
+        self.ctl(ADD, event_source, events, id)
     }
     
-    pub fn add_fd(&mut self, polled_fd: c_int, events: u32, id: uint) -> IoResult<()> {
-        let mut ev = EpollEvent{events:events, data:id as u64};
-        let ev_ptr: *mut EpollEvent = &mut ev;
-        
-        let status = unsafe {epoll_ctl(self.fd, ADD, polled_fd, ev_ptr)};
-        if status < 0 {
-            return Err(IoError::last_error())
-        }
-        
-        Ok(())
+    pub fn update<T:IoEventSource>(&mut self, event_source: &T, events: u32, id: uint) -> IoResult<()> {
+        self.ctl(MOD, event_source, events, id)
     }
     
-    pub fn update(&mut self, polled_fd: c_int, events: u32, id: uint) -> IoResult<()> {
+    pub fn remove<T:IoEventSource>(&mut self, event_source: &T) -> IoResult<()> {
+        self.ctl(DEL, event_source, 0, 0)
+    }
+    
+    fn ctl<T:IoEventSource>(&mut self, op: c_int, event_source: &T, events: u32, id: uint) -> IoResult<()> {
         let mut ev = EpollEvent{events:events, data:id as u64};
-        let ev_ptr: *mut EpollEvent = &mut ev;
         
         let status = unsafe {
-            epoll_ctl(self.fd, MOD, polled_fd, ev_ptr)
-        };
-        if status < 0 {
-            return Err(IoError::last_error())
-        }
-        
-        Ok(())
-    }
-    
-    pub fn remove(&mut self, polled_fd: c_int) -> IoResult<()> {
-        let mut ev = EpollEvent{events:0, data:0};
-        let ev_ptr: *mut EpollEvent = &mut ev;
-        
-        let status = unsafe {
-            epoll_ctl(self.fd, DEL, polled_fd, ev_ptr)
+            epoll_ctl(self.fd, op, event_source.fd(), &mut ev)
         };
         if status < 0 {
             return Err(IoError::last_error())
@@ -114,6 +95,7 @@ impl IoSelector {
         let n_events = unsafe { 
             epoll_wait(self.fd, &mut ev, 1 as c_int, -1 as c_int) 
         };
+        
         if n_events < 0 {
             return Err(IoError::last_error());
         }
@@ -121,7 +103,6 @@ impl IoSelector {
         Ok(Event{id: ev.data as uint, events: ev.events})
     }
 }
-
 
 impl Drop for IoSelector {
     fn drop(&mut self) {
