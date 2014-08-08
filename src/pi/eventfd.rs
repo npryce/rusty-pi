@@ -3,9 +3,10 @@
 
 extern crate libc;
 
-use self::libc::{c_int,c_uint,close};
-use std::io::{IoResult,IoError};
+use self::libc::{c_int,c_uint};
+use std::io::IoResult;
 use std::sync::Arc;
+use super::unixio::{Fd,check_syscall,check_syscall_action};
 use super::epoll::{IoEventSource,fd_t};
 
 pub static SEMAPHORE : c_int = 1;
@@ -13,7 +14,7 @@ pub static CLOEXEC : c_int = 02000000;
 pub static NONBLOCK : c_int = 04000;
 
 pub struct Eventfd {
-    fd: c_int
+    fd: Fd
 }
 
 pub type EventCount = u64;
@@ -26,40 +27,18 @@ extern {
 
 impl Eventfd {
     pub fn create(flags: c_int) -> IoResult<Eventfd> {
-        let fd = unsafe {eventfd(0, flags)};
-        if fd < 0 {
-            return Err(IoError::last_error());
-        }
-        
-        Ok(Eventfd{fd:fd})
+        check_syscall(unsafe {eventfd(0, flags)}, |fd| Eventfd{fd: Fd::own(fd)})
     }
     
     pub fn write(&self, n: EventCount) -> IoResult<()> {
-        let status = unsafe {eventfd_write(self.fd, n)};
-        if status < 0 {
-            return Err(IoError::last_error());
-        }
-        
-        Ok(())
+        check_syscall_action(unsafe {eventfd_write(self.fd.native, n)})
     }
     
     pub fn read(&self) -> IoResult<EventCount> {
         let mut count : EventCount = 0;
         
-        let status = unsafe {eventfd_read(self.fd, &mut count)};
-        if status < 0 {
-            return Err(IoError::last_error());
-        }
-        
-        Ok(count)
-    }
-}
-
-impl Drop for Eventfd {
-    fn drop(&mut self) {
-        unsafe {
-            close(self.fd);
-        }
+        check_syscall(unsafe {eventfd_read(self.fd.native, &mut count)},
+                      |_| count)
     }
 }
 
@@ -85,7 +64,7 @@ impl Semaphore {
 
 impl IoEventSource for Semaphore {
     fn fd(&self) -> fd_t {
-        self.fdref.fd
+        self.fdref.fd.native
     }
 }
 
