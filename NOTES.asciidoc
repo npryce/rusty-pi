@@ -1,2 +1,4 @@
 
 * Need to explicitly set the state of the GPIO pin on creation of the Pin struct -- unexporting does not reset it.
+
+* To enable i2c you need to remove (or comment out) the line 'blacklist i2c-bcm2708' from /etc/modprobe.d/raspi-blacklist.conf, and add the lines 'i2c-bcm2708' and 'i2c-dev' to /etc/modules. Then reboot the Pi.
