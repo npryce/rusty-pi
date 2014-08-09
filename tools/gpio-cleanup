@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set -e
+
+for f in $(find /sys/class/gpio/ -name 'gpio[0-9]*')
+do
+    echo $(basename $f | cut -c 5-) | tee /sys/class/gpio/unexport
+done
