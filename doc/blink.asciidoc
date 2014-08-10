@@ -9,26 +9,26 @@ error handling.
 == What is GPIO?
 
 GPIO, which stands for general-purpose input/output, is the simplest
-digital I/O you can do with a computer.  A GPIO pin can controlled by
-software to either set or read set the logical voltage level at the
+digital I/O you can do with a computer.  A GPIO pin can be controlled
+by software to either set or read the logical voltage level at the
 pin.  A GPIO output pin can turn an LED or buzzer on and off, for
 example.  An input pin can receive input from a button or sensor.
 
-Eight of the pins on the Raspberry Pi's header are dedicated GPIO. The
-Raspbian operating system makes the GPIO pins available to user-space
-programs as files in the /sys filesystem. Getting to grips with GPIO
-programming can be pretty confusing at first because of the multitude
-of ways in which GPIO pins are identified in the Raspberry Pi
-documentation.
+Eight of the pins on the Raspberry Pi's header are dedicated to
+GPIO. The Raspbian operating system makes the GPIO pins available to
+user-space programs as files in the /sys filesystem.
 
-The pins on the header connect to the pins of the system-on-a-chip
-(SoC) at the heart of the Raspberry Pi.  Each SoC pin has a number.
-Twenty six of the SoC pins are routed to the header, but those twenty
-six pins do not have consecutive numbers. The Raspberry Pi
-documentation fives the header pins numbers 1 to 26 and also uses the
-names GP0 to GP7 for the eight header pins dedicated to GPIO, but
-neither the header pin number nor the GP0 to GP7 names has any
-relation to the number used by the SoC for that pin.
+Getting to grips with GPIO programming can be pretty confusing at
+first because of the multitude of ways in which GPIO pins are
+identified in the Raspberry Pi documentation. The pins on the header
+connect to the pins of the system-on-a-chip (SoC) at the heart of the
+Raspberry Pi.  Each SoC pin has a number.  Twenty six of the SoC pins
+are routed to the header, but those twenty six pins do not have
+consecutive numbers. The Raspberry Pi documentation fives the header
+pins numbers 1 to 26 and also uses the names GP0 to GP7 for the eight
+header pins dedicated to GPIO, but neither the header pin number nor
+the GP0 to GP7 names has any relation to the number used by the SoC
+for that pin.
 
 The operating system's programming interface for GPIO addresses the
 pins _only_ by their SoC pin numbers.  When programming GPIO, we can
@@ -40,11 +40,12 @@ To avoid confusion this book only refers to GPIO pins by their SoC
 numbers and does not use the names GP0 to GP7. The circuit diagrams
 show how the SoC pin numbers relate to the physical header pins.
 
+TIP: If you buy a breakout board, choose one that labels the GPIO pins
+     with their the SoC numbers, not GP0...GP7.
+
 Let's have a look at the circuit we need to build to blink an LED with
 GPIO.
 
-TIP: If you buy a breakout board, make that it labels the GPIO pins
-     with their the SoC numbers, not GP0...GP7.
 
 === The Circuit
 
@@ -59,7 +60,7 @@ You will need:
 image::blink.svg[]
 
 
-=== Controlling the GPIO Pin from Software
+=== Controlling the GPIO Pin from the Command Line
 
 The Raspbian operating system exposes each GPIO pin to user space
 processes as a directory of text files in the /sys filesystem. Because
@@ -170,13 +171,13 @@ it's too easy to ignore I/O failures and allow erroneous behaviour to
 occur.  Rust does not let us be so lazy, as we will see.
 =======================================================================
 
-Now we understand the basics of GPIO in Rasbian, let's write it in
-Rust.  We'll go step by step, building up the functionality and
-explaining Rust's features as we go.  If you're impatient to see some
-blinking lights, feel free to jump ahead, compile 
-<<raw-blink,the full program>> 
-and run it onto your Pi before coming back here to examine into the 
-Rust features that are used in the program.
+Now we understand the basics of GPIO in Rasbian, let's control the
+GPIO pi from Rust.  We'll go step by step, building up the
+functionality and explaining Rust's features as we go.  If you're
+impatient to see some blinking lights, feel free to jump ahead,
+compile <<raw-blink,the full program>> and run it onto your Pi before
+coming back here to examine into the Rust features that are used in
+the program.
 
 === Export and Unexport the Pin
 
