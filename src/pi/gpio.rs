@@ -4,6 +4,7 @@
 extern crate native;
 extern crate libc;
 
+use self::libc::c_int;
 use std::fmt::Show;
 use std::io;
 use std::io::{File,IoResult,IoError,TimedOut,ShortWrite,OtherIoError};
@@ -11,18 +12,13 @@ use std::rt::rtio;
 use std::rt::rtio::{SeekSet,RtioFileStream};
 use self::native::io::FileDesc;
 use self::native::io::file::open;
-use super::epoll::{IoEventSource,fd_t};
+use super::epoll::IoEventSource;
     
 #[deriving(Copy,Show)]
 pub enum Direction {In, Out}
 
 #[deriving(Copy,Show)]
 pub enum Edge {NoInterrupt, RisingEdge, FallingEdge, BothEdges}
-
-pub struct Pin {
-    port : uint,
-    fd : FileDesc
-}
 
 fn write_value_to<T:Show>(path: &str, value: T) -> IoResult<()> {
     let mut f = try!(File::open_mode(&Path::new(path), io::Open, io::Write));
@@ -41,6 +37,11 @@ fn error_rtio_to_io(err: rtio::IoError) -> IoError {
     return ioerr;
 }
 
+
+pub struct Pin {
+    port : uint,
+    fd : FileDesc
+}
 
 impl Pin {
     fn write_to_device_file<T:Show>(&mut self, filename: &str, value: T) -> IoResult<()> {
@@ -100,7 +101,7 @@ impl Pin {
 }
 
 impl IoEventSource for Pin {
-    fn fd(&self) -> fd_t {
+    fn fd(&self) -> c_int {
         self.fd.fd()
     }
 }

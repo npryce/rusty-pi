@@ -6,7 +6,6 @@ extern crate libc;
 
 use self::libc::c_int;
 use std::io::IoResult;
-pub use self::native::io::file::fd_t;
 use super::unixio::{Fd,check_syscall,check_syscall_action};
 
 pub static CLOEXEC : u32 = 02000000;
@@ -36,7 +35,7 @@ extern {
 }
 
 pub trait IoEventSource {
-    fn fd(&self) -> fd_t;
+    fn fd(&self) -> c_int;
 }
 
 #[deriving(Copy,Show)]
@@ -56,7 +55,7 @@ impl IoSelector {
     
     pub fn create1(flags: int) -> IoResult<IoSelector> {
         check_syscall(unsafe {epoll_create1(flags as c_int)}, 
-                      |fd| {IoSelector{fd: Fd::own(fd)}})
+                      |fd| { IoSelector{fd: Fd::own(fd)} })
     }
     
     pub fn add<'a, T:IoEventSource>(&'a mut self, event_source: &'a T, events: u32, id: uint) -> IoResult<()> {

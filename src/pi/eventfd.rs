@@ -7,7 +7,7 @@ use self::libc::{c_int,c_uint};
 use std::io::IoResult;
 use std::sync::Arc;
 use super::unixio::{Fd,check_syscall,check_syscall_action};
-use super::epoll::{IoEventSource,fd_t};
+use super::epoll::IoEventSource;
 
 pub static SEMAPHORE : c_int = 1;
 pub static CLOEXEC : c_int = 02000000;
@@ -63,7 +63,7 @@ impl Semaphore {
 }
 
 impl IoEventSource for Semaphore {
-    fn fd(&self) -> fd_t {
+    fn fd(&self) -> c_int {
         self.fdref.fd.native
     }
 }

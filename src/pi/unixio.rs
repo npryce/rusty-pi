@@ -5,16 +5,15 @@ extern crate native;
 extern crate libc;
 
 use self::libc::{c_int,close};
-pub use self::native::io::file::fd_t;
 use std::io::{IoResult,IoError};
 
 pub struct Fd {
-    pub native: fd_t
+    pub native: c_int
 }
 
 impl Fd {
-    pub fn own(fd: fd_t) -> Fd {
-        Fd{native: fd}
+    pub fn own(native_fd: c_int) -> Fd {
+        Fd{ native: native_fd }
     }
 }
 

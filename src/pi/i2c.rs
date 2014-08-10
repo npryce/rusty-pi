@@ -45,9 +45,6 @@ extern {
     fn ioctl(fd: c_int, req: c_int, ...) -> c_int;
 }
 
-pub struct BusMaster {
-    fd: Fd
-}
 
 #[deriving(Copy)]
 pub enum Message<'a> {
@@ -55,10 +52,14 @@ pub enum Message<'a> {
     Write(&'a [u8])
 }
 
-impl BusMaster {
-    pub fn open(bus_index: uint) -> IoResult<BusMaster> {
+pub struct Master {
+    fd: Fd
+}
+
+impl Master {
+    pub fn open(bus_index: uint) -> IoResult<Master> {
         check_syscall(unsafe {open(format!("/dev/i2c-{:u}", bus_index).to_c_str().as_ptr(), O_RDWR, 0)},
-                      |fd| { BusMaster{fd: Fd::own(fd)} })
+                      |fd| { Master{fd: Fd::own(fd)} })
     }
     
     pub fn transaction<'a>(&self, addr: SlaveAddress, messages: &'a[Message]) -> IoResult<()> {
@@ -80,5 +81,16 @@ impl BusMaster {
                 ioctl(self.fd.native, IOCTL_RDWR, 
                       &i2c_rdwr_ioctl_data{msgs: i2c_msgs.as_mut_ptr(), nmsgs: i2c_msgs.len() as u32}))
         }
+    }
+}
+
+pub struct Slave<'a> {
+    master: &'a Master, 
+    addr: SlaveAddress
+}
+
+impl <'a> Slave<'a> {
+    pub fn transaction(&'a self, messages: &[Message]) -> IoResult<()> {
+        self.master.transaction(self.addr, messages)
     }
 }
