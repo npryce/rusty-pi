@@ -3,26 +3,28 @@
 [quote, Alan Perlis]
 A language that doesn't affect the way you think about programming, is not worth knowing.
 
-Rust's big idea is _ownership_.
-
-Ownership, and a distinction between moving and copying data.
-
-Ok, two big ideas.
-
-Ownership, a distinction between moving and copying data, and zero-overhead abstractions.
-
-Ok, three big ideas. 
-
-All three support Rust's principle goal: memory safety without runtime overhead.
+Rust's big idea is _ownership_ and, in particular, being explicit
+about transfer of ownership.  The Rust compiler checks ownership and
+lifetimes at compile time and rejects a program that attempts to use
+values beyond their lifetimes.  Rust's principal goal as a systems
+programming language is memory safety without runtime overhead.
+Although Rust programs manually manage memory, the Rust compiler
+rejects programs that try to dereference null pointers or dangling
+pointers, double-free heap-allocated memory, use uninitialised memory,
+overrun buffers or create data races between threads.  Rust's
+combination of a powerful type system and control structures adopted
+from modern functional programming languages gives the programmer the
+expressiveness of a high-level language and the precise control over
+memory and performance of a low-level language.
 
 
 === Ownership, Transferring Ownership, and Borrowing
 
-Rust's novel feature, which makes it a "perlis language" in my book, is that by default values are moved, not copied, by default.
+Rust's novel feature -- the feature that makes it a "Perlis language" in my book -- is that, by default, values are _moved_, not copied.
 
 ... more to come...
 
-This program does not compile.
+Example. This program does not compile.
 
 -------------------------------------------------------
 include::../src/file-ownership-err.rs[]
@@ -34,13 +36,15 @@ Error:
 include::file-ownership-err.compile-output[]
 -------------------------------------------------------
 
+
+=== Zero-Overhead Abstractions
+
+TBD
+
+
 === Message-Passing Concurrency
 
-TODO
 
 Rust's ownership model extends to concurrency.  Disallows data races.
 
-
-
-=== Zero-Overhead Abstractions
 

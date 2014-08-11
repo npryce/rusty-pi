@@ -113,3 +113,8 @@ More information about Rust can be found at the following sites.
  * http://www.rustforrubyists.com Rust for Rubyists by Steve
    Klabnik, a book about Rust aimed primarily at Ruby programmers.
 
+
+=== Which Version of Rust?
+
+The code in this book is written for Rust version {rust_version}.
+

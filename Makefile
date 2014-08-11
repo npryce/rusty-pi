@@ -35,6 +35,7 @@ out/docbook/book.xml: $(book_src) $(rust_src) $(rust_compile_errors)
 	asciidoc \
 		-a icons \
 		-a version="$(version)" \
+		-a rust_version="$(rust_version)" \
 		-b docbook45 \
 		-o $@ doc/book.asciidoc
 
