@@ -45,7 +45,7 @@ Now, download the Rust compiler source code:
 
 [source,sh]
 ---------------------------------------------------------------
-% git clone http://github.com/mozilla/rust.git
+% git clone https://github.com/rust-lang/rust.git
 ---------------------------------------------------------------
 
 Add the Raspberry Pi tools to your shell's command search path:
