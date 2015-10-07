@@ -41,11 +41,11 @@ named pi-tools in your home directory:
 
 === Compiling the Rust Cross-Compiler
 
-Now, download the Rust compiler source code:
+Now, download the Rust compiler source code and jump into cloned directory:
 
 [source,sh]
 ---------------------------------------------------------------
-% git clone https://github.com/rust-lang/rust.git
+% git clone https://github.com/rust-lang/rust.git rust && cd $_
 ---------------------------------------------------------------
 
 Add the Raspberry Pi tools to your shell's command search path:
